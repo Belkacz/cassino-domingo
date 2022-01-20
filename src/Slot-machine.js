@@ -18,11 +18,19 @@ export default function SlotMachine() {
     getList();
   }, []);
 
+  let placeholder = [
+    { "id": 1, "name": "losowanie" },
+    { "id": 2, "name": "losowanie" },
+    { "id": 3, "name": "losowanie" },
+    { "id": 4, "name": "losowanie" },
+    { "id": 5, "name": "losowanie" },
+  ]
+
   function roll() {
     let counter = 0;
     let listtocheck = [];
     if (score.length > 4) {
-      setNewScore([]);
+      setNewScore((prev)=>[...placeholder]);
     }
     let intervalID = setInterval(function () {
       setShowResult(true);
@@ -30,7 +38,8 @@ export default function SlotMachine() {
       randomlist.sort(() => Math.random() - Math.random());
       let sliceelem = randomlist.slice(0, 1);
       listtocheck.push(sliceelem[0]);
-      setNewScore((prev) => [...prev, sliceelem[0]]);
+      setNewScore((prev) => [sliceelem[0], ...prev].splice(0,5));
+
       counter++;
       // checkwin(listtocheck);
       if (counter > 4) {
@@ -42,6 +51,7 @@ export default function SlotMachine() {
 
   function checkwin(listtocheck) {
     let bigeststrike = 0;
+    console.log(score)
 
     listtocheck.forEach((element1) => {
       let actualstrike = 0;
@@ -54,8 +64,6 @@ export default function SlotMachine() {
         }
       });
     });
-    console.log(bigeststrike);
-    console.log(bigeststrike > 2);
     if (bigeststrike > 2) {
       console.log(bigeststrike > 2);
       setWin(3);
