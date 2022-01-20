@@ -64,10 +64,9 @@ export default function SlotMachine() {
         }
       });
     });
-    if (bigeststrike > 2) {
-      console.log(bigeststrike > 2);
+    if (bigeststrike === 3) {
       setWin(3);
-    } else if (bigeststrike > 3) {
+    } else if (bigeststrike === 4) {
       setWin(4);
     } else if (bigeststrike > 4) {
       setWin(5);
