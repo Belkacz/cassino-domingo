@@ -150,16 +150,17 @@ export default function SlotMachine() {
     //     break;
     // }
     return (
-      <div id="results">
+      <div id="">
         <p>Wylosowano </p>
         <br></br>
-        <div className="slot">
+        <div className="">
           <section>
-            <div className="container">
-              {score.map(({ name, id }, index) => {
+            <div className="">
+              {score.map(({ name, id, src }, index) => {
                 return (
                   <div key={id + name + index}>
                     <span>{name}</span>
+                    <img src={src} display={"inline"}  alt={name} width={"50px"}></img>
                   </div>
                 );
               })}
@@ -168,6 +169,7 @@ export default function SlotMachine() {
         </div>
         <div>{winorlose}</div>
       </div>
+      
     );
   };
 
