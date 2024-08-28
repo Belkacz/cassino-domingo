@@ -1,5 +1,8 @@
 import React, { FC, useState, useEffect } from 'react';
 import { SlotMachineWrapper } from './SlotMachine.styled';
+import Lever from './Lever/Lever';
+
+import sevenImg from '../../assets/img/seven.png';
 
 interface SlotMachineProps {}
 
@@ -10,7 +13,12 @@ interface SlotItem {
 }
 
 const SlotMachine: FC<SlotMachineProps> = () => {
-    const [score, setNewScore] = useState<SlotItem[]>([]);
+    const [score, setNewScore] = useState<SlotItem[]>([
+        { id: 1, name: 'seven', src:'/img/seven.png' },
+        { id: 2, name: 'seven', src:'/img/seven.png' },
+        { id: 3, name: 'seven', src:'/img/seven.png' },
+        { id: 4, name: 'seven', src:'/img/seven.png' },
+        { id: 5, name: 'seven', src:'/img/seven.png' },]);
     const [originallist, setOriginalList] = useState<SlotItem[]>([]);
     const [showresult, setShowResult] = useState<boolean>(false);
     const [win, setWin] = useState<number>(0);
@@ -27,11 +35,11 @@ const SlotMachine: FC<SlotMachineProps> = () => {
     }, []);
 
     const placeholder: SlotItem[] = [
-        { id: 1, name: 'losowanie' },
-        { id: 2, name: 'losowanie' },
-        { id: 3, name: 'losowanie' },
-        { id: 4, name: 'losowanie' },
-        { id: 5, name: 'losowanie' },
+        { id: 1, name: 'losowanie', src:'/loading.png' },
+        { id: 2, name: 'losowanie', src:'/loading.png' },
+        { id: 3, name: 'losowanie', src:'/loading.png' },
+        { id: 4, name: 'losowanie', src:'/loading.png' },
+        { id: 5, name: 'losowanie', src:'/loading.png' },
     ];
 
     const roll = () => {
@@ -46,14 +54,21 @@ const SlotMachine: FC<SlotMachineProps> = () => {
             setShowResult(true);
             let randomlist = [...originallist];
             randomlist.sort(() => Math.random() - Math.random());
-            const sliceelem = randomlist.slice(0, 1);
-            listtocheck.push(sliceelem[0]);
-            setNewScore((prev) => [sliceelem[0], ...prev].splice(0, 5));
+            const sliceElem = randomlist.slice(0, 1);
+            listtocheck.push(sliceElem[0]);
+
+            setNewScore((prev) => {
+                const newScore = [...prev];
+                console.log(prev)
+                newScore[counter-1] = sliceElem[0];
+                return newScore;
+            });
 
             counter++;
             if (counter > 4) {
                 checkwin(listtocheck);
                 clearInterval(intervalID);
+                setLeverStatus(false);
             }
         }, 1000);
     };
@@ -98,19 +113,29 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         return <div>{winOrLose}</div>;
     };
 
+    const [leverStatus, setLeverStatus] = useState(false);
+
+    const handleLeverPull = () => {
+        setLeverStatus(true);
+        roll();
+        console.log('Dźwignia pociągnięta');
+      };
+
     return (
         <SlotMachineWrapper>
+            <div>
+            <h1>Jednoręki Bandyta</h1>
+            </div>
             <div>
                 <p>Wylosowano:</p>
                 <br />
                 <div>
                     <section>
-                        <div>
+                        <div className='rollResult'>
                             {score.map(({ name, id, src }, index) => (
-                                <div key={`${id}-${name}-${index}`}>
-                                    <span>{name}</span>
+                                <div className='singleSlot' key={`${id}-${name}-${index}`}>
                                     {src && (
-                                        <img
+                                        <img className={`slotImg ${name === 'losowanie' ? 'loadingImg' : ''}`}
                                             src={src}
                                             style={{ display: 'inline' }}
                                             alt={name}
@@ -125,7 +150,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                 {results()}
             </div>
             <div>
-                <button onClick={roll}>Roll</button>
+                <Lever onPull={handleLeverPull} leverStatus={leverStatus}></Lever>
             </div>
         </SlotMachineWrapper>
     );
