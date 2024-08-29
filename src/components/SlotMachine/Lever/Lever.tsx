@@ -17,7 +17,7 @@ const Lever: FC<LeverProps> = ({ onPull, leverStatus}) => {
    return (
       <LeverWrapper>
          <div>
-            <div onClick={onPull} className={`lever ${leverStatus ? "pull" : ""}`} ></div> 
+            <div onClick={onPull} className={`lever ${leverStatus ? "pull" : ""}`} ></div>
          </div>
       </LeverWrapper>
    );
