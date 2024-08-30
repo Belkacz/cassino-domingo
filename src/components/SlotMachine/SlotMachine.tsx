@@ -75,36 +75,6 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         { id: 9, name: 'watermelon', src: '/img/watermelon.png' },
     ];
 
-    const rell1SpinRef = useRef(rell1Spin);
-
-    // useEffect(() => {
-    //     if(leverStatus ==  true){
-    //         console.log('lever stat : '+ leverStatus)
-    //         rell1SpinRef.current = rell1Spin;
-    //         console.log(rell1SpinRef.current)
-    //         // setNewRell1(generateRandomReel(baseList, 1));
-    //         // setNewRell2(generateRandomReel(baseList, 1));
-    //         // setNewRell3(generateRandomReel(baseList, 1));
-    //         // setNewRell4(generateRandomReel(baseList, 1));
-    //         // setNewRell5(generateRandomReel(baseList, 1));
-    //     }
-
-    // }, [leverStatus]);
-
-
-    // useEffect(() => {
-    //     const getList = async () => {
-    //         const resp = await fetch(
-    //             'https://my-json-server.typicode.com/Belkacz/cassino-server/roller'
-    //         );
-    //         const data: SlotItem[] = await resp.json();
-    //         setOriginalList(data);
-    //     };
-    //     getList();
-    // }, []);
-
-
-
     const checkwin = (listtocheck: SlotItem[]) => {
         let biggestStrike = 0;
 
@@ -154,23 +124,11 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         return finalList;
     }
 
-    const moveFirstElemToEnd = (list: SlotItem[]) => {
-        let firstElem = list.shift();
-        if (firstElem !== undefined) {
-            list.push(firstElem);
-        }
-        return list;
-    }
+
 
     const spin = () => {
         let counter = 0;
         let listtocheck: SlotItem[] = [];
-        let spin1Status = true;
-        let spin2Status = true;
-        let spin3Status = true;
-        let spin4Status = true;
-        let spin5Status = true;
-
 
         setNewRell1(generateRandomReel(baseList, 1));
         setNewRell2(generateRandomReel(baseList, 1));
@@ -179,43 +137,21 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         setNewRell5(generateRandomReel(baseList, 1));
 
         const intervalID = setInterval(() => {
-            // if (spin1Status) {
-            //     setNewRell1((prevRell) => moveFirstElemToEnd([...prevRell]));
-            // }
-            // if (spin2Status) {
-            //     setNewRell2((prevRell) => moveFirstElemToEnd([...prevRell]));
-            // }
-            // if (spin3Status) {
-            //     setNewRell2((prevRell) => moveFirstElemToEnd([...prevRell]));
-            // }
-            // if (spin4Status) {
-            //     setNewRell3((prevRell) => moveFirstElemToEnd([...prevRell]));
-            // }
-            // if (spin5Status) {
-            //     setNewRell5((prevRell) => moveFirstElemToEnd([...prevRell]));
-            // }
-
-
             switch (counter) {
-                case 2:
+                case 1:
                     setRell1Spin(false)
-                    spin1Status = false;
+                    break;
+                case 2:
+                    setRell2Spin(false)
+                    break;
+                case 3:
+                    setRell3Spin(false)
                     break;
                 case 4:
-                    setRell2Spin(false)
-                    spin2Status = false;
-                    break;
-                case 6:
-                    setRell3Spin(false)
-                    spin3Status = false;
-                    break;
-                case 8:
                     setRell4Spin(false)
-                    spin4Status = false;
                     break;
-                case 10:
+                case 5:
                     setRell5Spin(false)
-                    spin5Status = false;
                     checkwin(listtocheck);
                     clearInterval(intervalID);
                     setLeverStatus(false);
@@ -230,7 +166,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                 setLeverStatus(false);
             }
             counter++;
-        }, 500);
+        }, 1000);
     }
 
     const handleLeverPull = () => {

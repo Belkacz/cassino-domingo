@@ -14,19 +14,21 @@ interface ReelProps {
 const Reel: FC<ReelProps> = ({ symbols, spinning, id=0 }) => {
    const [displayedSymbols, setDisplayedSymbols] = useState(symbols);
 
+   const moveFirstElemToEnd = (list: SlotItem[]) => {
+      let firstElem = list.shift();
+      if (firstElem !== undefined) {
+          list.push(firstElem);
+      }
+      return list;
+  }
+
    useEffect(() => {
       
       setDisplayedSymbols(symbols);
    
       if (spinning) {
          const spin = setInterval(() => {
-            setDisplayedSymbols((prevSymbols) => {
-               const firstElem = prevSymbols.shift();
-               if (firstElem !== undefined) {
-                  prevSymbols.push(firstElem);
-               }
-               return [...prevSymbols];
-            });
+            setDisplayedSymbols((prevRell) => moveFirstElemToEnd([...prevRell]));
          }, 500);
 
          clearInterval(spin);
