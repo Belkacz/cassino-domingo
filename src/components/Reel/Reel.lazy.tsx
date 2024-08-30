@@ -4,6 +4,8 @@ const LazyReel = lazy(() => import('./Reel'));
 interface LazyReelProps {
   symbols: any;
   spinning: any;
+
+  id: number;
 }
 
 const Reel = (props: LazyReelProps & { children?: React.ReactNode; }) => (

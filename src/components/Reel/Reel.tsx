@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { ReelWrapper } from './Reel.styled';
 interface SlotItem {
    id: number;
@@ -8,23 +8,38 @@ interface SlotItem {
 interface ReelProps {
    symbols: SlotItem[];
    spinning: boolean;
+   id?: number;
 }
 
-const Reel: FC<ReelProps> = ({ symbols, spinning }) => {
-   const reelRef = useRef<HTMLDivElement>(null);
+const Reel: FC<ReelProps> = ({ symbols, spinning, id=0 }) => {
+   const [displayedSymbols, setDisplayedSymbols] = useState(symbols);
+
    useEffect(() => {
-      const reelElement = document.querySelector('.reel');
-      if (reelRef.current) {
-         console.log('Reel element height:', reelRef.current.clientHeight);
-         // Możesz tutaj dodać inne manipulacje DOM, np. obliczenia, animacje itp.
+      
+      setDisplayedSymbols(symbols);
+   
+      if (spinning) {
+         const spin = setInterval(() => {
+            setDisplayedSymbols((prevSymbols) => {
+               const firstElem = prevSymbols.shift();
+               if (firstElem !== undefined) {
+                  prevSymbols.push(firstElem);
+               }
+               return [...prevSymbols];
+            });
+         }, 500);
+
+         clearInterval(spin);
       }
-   }, [spinning]); // Zależności tablicy - efekt uruchomi się po zmianie `spinning`
+   
+   
+   }, [symbols, spinning]);
 
    return (<ReelWrapper>
       
-      <div className={`reel ${spinning ? 'spinning' : ''}`}>
-         {symbols.map((symbol, index) => (
-            <div key={index} className="symbol">
+      <div className={`reel`}>
+         {displayedSymbols.map((symbol, index) => (
+            <div key={index} className={`symbol ${spinning ? 'spinning' : ''}`}>
                <img src={symbol.src} className='image'></img>
             </div>
          ))}

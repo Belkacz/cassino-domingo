@@ -9,8 +9,9 @@ export const SlotMachineWrapper = styled.div`
 .rell-cont{
   display: flex;
   /* padding: 50px; */
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) 50px, rgba(0, 0, 0, 1) 200px, rgba(0, 0, 0, 0) 250px);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) 50px, rgba(0, 0, 0, 1) 200px, rgba(0, 0, 0, 0) 250px);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) 50px, rgba(0, 0, 0, 1) 100px, rgba(0, 0, 0, 0) 150px);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) 50px, rgba(0, 0, 0, 1) 100px, rgba(0, 0, 0, 0) 150px);
+}
 .rollResult {
   padding: 20px;
   display: flex;
@@ -42,7 +43,4 @@ export const SlotMachineWrapper = styled.div`
     height: 60px;
 }
 }
-
-
-
 `;
