@@ -183,32 +183,54 @@ const SlotMachine: FC<SlotMachineProps> = () => {
 
     return (
         <SlotMachineWrapper>
-            <div>
-                <h1>Jednoręki Bandyta</h1>
-            </div>
-            <div className='display'>
-                <div className='rell-cont'>
-                    <div className='rell1'>
-                        <Reel symbols={rell1} spinning={rell1Spin} />
+            <div className='mian-slot-container'>
+                <div className='main-name-box box-3d'>
+                    <div className='name-box plate top'>
                     </div>
-                    <div className='rell2'>
-                        <Reel symbols={rell2} spinning={rell2Spin} />
-                    </div>
-                    <div className='rell3'>
-                        <Reel symbols={rell3} spinning={rell3Spin} />
-                    </div>
-                    <div className='rell4'>
-                        <Reel symbols={rell4} spinning={rell4Spin} />
-                    </div>
-                    <div className='rell5'>
-                        <Reel symbols={rell5} spinning={rell5Spin} />
+                    <div className='name-box plate front'>
+                        <h1>Jednoręki Bandyta</h1>
                     </div>
                 </div>
+
+                <div className='box-mount box-3d'>
+                    {/* <div className='back-box'>
+                    </div> */}
+                    <div className='plate box sides right'>
+                    </div>
+                    <div className='plate box top main-palte'>
+                    </div>
+                    <div className='plate box front main-palte'>
+                        <div className='display'>
+                            <div className='rell-cont'>
+                                <div className='rell1'>
+                                    <Reel symbols={rell1} spinning={rell1Spin} />
+                                </div>
+                                <div className='rell2'>
+                                    <Reel symbols={rell2} spinning={rell2Spin} />
+                                </div>
+                                <div className='rell3'>
+                                    <Reel symbols={rell3} spinning={rell3Spin} />
+                                </div>
+                                <div className='rell4'>
+                                    <Reel symbols={rell4} spinning={rell4Spin} />
+                                </div>
+                                <div className='rell5'>
+                                    <Reel symbols={rell5} spinning={rell5Spin} />
+                                </div>
+                            </div>
+                            <div className='display-frame'></div>
+                        </div>
+
+
+                    </div>
+                    <div className='lever-wrapper'>
+                        <Lever onPull={handleLeverPull} leverStatus={leverStatus}></Lever>
+                    </div>
+                </div>
+
             </div>
 
-            <div>
-                <Lever onPull={handleLeverPull} leverStatus={leverStatus}></Lever>
-            </div>
+
 
         </SlotMachineWrapper>
     );

@@ -7,7 +7,8 @@ export const ReelWrapper = styled.div`
 }
 
 .symbol {
-  height: 50px;
+  height: 60px;
+  width: 60px;
   text-align: center;
   font-size: 24px;
   background-color: #fff;
@@ -15,7 +16,7 @@ export const ReelWrapper = styled.div`
 }
 
 .image{
-    height: 45px;
+    height:60px;
 }
 
 .reel {

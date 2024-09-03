@@ -1,5 +1,12 @@
+html{
+  background-image: url("../public/background.jpeg");
+  background: url("../public/background.jpeg") no-repeat center center;
+  /* background-size: cover;  */
+}
+
 .App {
   text-align: center;
+
 }
 
 .App-logo {

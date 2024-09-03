@@ -73,9 +73,9 @@ export const LeverWrapper = styled.div`
 
 
 .lever-socket-container {
-    position: absolute;
-  top: 60vh;
-  right: 20vw;
+  position: absolute;
+  /* top: 60vh;
+  right: 20vw; */
 
     width: 200px;
     height: 100px;
