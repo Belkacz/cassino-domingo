@@ -4,7 +4,6 @@ import { LeverWrapper } from './Lever.styled';
 interface LeverProps {
    onPull: () => void;
    leverStatus: boolean;
-
 }
 
 const Lever: FC<LeverProps> = ({ onPull, leverStatus }) => {

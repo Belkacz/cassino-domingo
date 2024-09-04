@@ -2,6 +2,12 @@ import styled from 'styled-components';
 
 export const SlotMachineWrapper = styled.div`
 
+.lamp {
+  height:10px;
+  width: 10px;
+  background: radial-gradient(circle, rgba(231,255,46,1) 0%, rgba(239,255,0,0) 100%);;
+}
+
 .plate{
   display: flex;
   position: absolute;
@@ -10,27 +16,37 @@ export const SlotMachineWrapper = styled.div`
   box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
 }
 
-.main-palte {
+.name-box-front  {
+  transform: translateZ(320px);
+}
+.name-box-right { 
+  top: 6px;
+  transform: rotateY(90deg) translateZ(165px);
+  height:80px;
+}
+.name-box-top{
+  transform: rotateX(-90deg) translateZ(-146px);
+  height: 300px;
+  width: 400px;
+  top: 0px;
+  left:17px;
+
+}
+
+.red-box-main-plate {
   width:400px;
   height: 660px;
 }
 
-
-.sides {
+.red-box-sides-plate {
   height: 660px;
   width: 600px;
   z-index: 100;
-  -webkit-box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
-  -moz-box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
-  box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
 }
 
-.front  { transform: translateZ(320px); }
-.back   { transform: rotateY(0deg) translateZ(-50px); }
-.left   { transform: rotateY(-90deg) translateZ(250px); }
-.right  { transform: rotateY(90deg) translateZ(200px);  }
-.top    { transform: rotateX(90deg) translateZ(330px); }
-.bottom { transform: rotateX(-90deg) translateZ(50px); }
+.red-box-front  { transform: translateZ(320px); }
+.red-box-right  { transform: rotateY(90deg) translateZ(200px);  }
+.red-box-top    { transform: rotateX(90deg) translateZ(330px); }
 
 @keyframes colorChange {
   0% {
@@ -45,11 +61,13 @@ export const SlotMachineWrapper = styled.div`
 }
 .main-name-box{
     z-index: 100;
-   padding: 0px 0px 100px 20px;
+   /* padding: 0px 0px 100px 20px; */
   display: flex;
   justify-content: center;
   align-content: center;
   position: relative;
+  width: 400px;
+  height: 100px;
 }
 .name-box{
   background-color: yellow;
@@ -103,7 +121,7 @@ export const SlotMachineWrapper = styled.div`
   transform: rotateX(-5deg) rotateY(-5deg); */
 }
 
-.box {
+.red-box  {
   justify-content: center;
   border-style: solid;
   border-color: black;
@@ -112,7 +130,7 @@ export const SlotMachineWrapper = styled.div`
 
 }
 
-.display{
+.control-panel{
   display: flex;
   justify-content: center;
   padding: 50px;
@@ -133,7 +151,7 @@ export const SlotMachineWrapper = styled.div`
   border: solid;
   border-radius: 10px;
 }
-.rell-cont{
+.display{
   display: flex;
   /* padding: 50px; */
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) 50px, rgba(0, 0, 0, 1) 150px, rgba(0, 0, 0, 0) 200px);

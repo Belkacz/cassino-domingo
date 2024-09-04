@@ -22,12 +22,14 @@ export const ReelWrapper = styled.div`
 .reel {
   display: flex;
   flex-direction: column;
-  height: 100%; /* Wysokość kontenera */
-  overflow: hidden; /* Ukrywa wszystko poza kontenerem */
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  top: -67px;
 }
 
 .symbol {
-  flex: 0 0 100%; /* Każdy symbol zajmuje 100% wysokości kontenera */
+  flex: 0 0 100%;
 }
 
 .spinning {
@@ -36,7 +38,18 @@ export const ReelWrapper = styled.div`
 
 @keyframes spin { 
   0% { transform: translateY(0); }
-  100% { transform: translateY(-100px);}
+  100% { transform: translateY(-80px);}
+}
+
+.end-spin {
+  animation: end-spin 1000ms ease-out;
+}
+
+@keyframes end-spin {
+  0% { transform: translateY(0px);}
+  33% { transform: translateY(40%);}
+  66% { transform: translateY(-33%);}
+  100% { transform: translateY(0px);}
 }
 
 /* .spinning {

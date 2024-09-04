@@ -137,6 +137,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         setNewRell5(generateRandomReel(baseList, 1));
 
         const intervalID = setInterval(() => {
+            console.log("interval")
             switch (counter) {
                 case 1:
                     setRell1Spin(false)
@@ -170,24 +171,31 @@ const SlotMachine: FC<SlotMachineProps> = () => {
     }
 
     const handleLeverPull = () => {
-        spin();
-        setLeverStatus(true);
-        setRell1Spin(true);
-        setRell2Spin(true);
-        setRell3Spin(true);
-        setRell4Spin(true);
-        setRell5Spin(true);
+        if(!leverStatus){
+            spin();
+            setLeverStatus(true);
+            setRell1Spin(true);
+            setRell2Spin(true);
+            setRell3Spin(true);
+            setRell4Spin(true);
+            setRell5Spin(true);
+    
+            console.log('Dźwignia pociągnięta');
+        } else {
+            console.log('Dźwignia zablokowana');
+        }
 
-        console.log('Dźwignia pociągnięta');
     };
 
     return (
         <SlotMachineWrapper>
             <div className='mian-slot-container'>
                 <div className='main-name-box box-3d'>
-                    <div className='name-box plate top'>
+                    <div className='name-box plate name-box-top'>
                     </div>
-                    <div className='name-box plate front'>
+                    <div className='name-box plate name-box-right'>
+                    </div>
+                    <div className='name-box plate name-box-front'>
                         <h1>Jednoręki Bandyta</h1>
                     </div>
                 </div>
@@ -195,13 +203,13 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                 <div className='box-mount box-3d'>
                     {/* <div className='back-box'>
                     </div> */}
-                    <div className='plate box sides right'>
+                    <div className='plate red-box red-box-sides-plate red-box-right'>
                     </div>
-                    <div className='plate box top main-palte'>
+                    <div className='plate red-box red-box-top red-box-main-plate '>
                     </div>
-                    <div className='plate box front main-palte'>
-                        <div className='display'>
-                            <div className='rell-cont'>
+                    <div className='plate red-box red-box-front red-box-main-plate '>
+                        <div className='control-panel'>
+                            <div className='display'>
                                 <div className='rell1'>
                                     <Reel symbols={rell1} spinning={rell1Spin} />
                                 </div>
@@ -223,6 +231,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
 
 
                     </div>
+                    <div className='lamp'></div>
                     <div className='lever-wrapper'>
                         <Lever onPull={handleLeverPull} leverStatus={leverStatus}></Lever>
                     </div>
