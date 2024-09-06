@@ -1,10 +1,11 @@
 import React, { lazy, Suspense } from 'react';
+import { SlotItem } from '../../shared/interfaces';
 
 const LazyReel = lazy(() => import('./Reel'));
 interface LazyReelProps {
   symbols: any;
   spinning: any;
-
+  setScore: (reelId: number, slot: SlotItem) => void;
   id: number;
 }
 

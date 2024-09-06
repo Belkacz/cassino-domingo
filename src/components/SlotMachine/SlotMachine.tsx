@@ -3,26 +3,35 @@ import { SlotMachineWrapper } from './SlotMachine.styled';
 import Lever from './Lever/Lever';
 
 import Reel from '../Reel/Reel';
+import { SlotItem } from '../../shared/interfaces';
 
 interface SlotMachineProps { }
 
-interface SlotItem {
-    id: number;
-    name: string;
-    src?: string;
+enum WinColors {
+    Gold = 'GOLD', //5strike
+    Silver = 'SILVER', //4Strike
+    Bronze = 'BRONZE', //3Strike
+    Pair = 'PAIR', //2x2
+    Doublet1 = 'DOUBLET1', //1x2
+    Doublet2 = 'DOUBLET2', //1x2 for second pair
+    None = 'NONE'
+}
+interface SlotItemScore extends SlotItem {
+    winStrike: WinColors
 }
 
 const SlotMachine: FC<SlotMachineProps> = () => {
-    const [score, setNewScore] = useState<SlotItem[]>([
-        { id: 1, name: 'seven', src: '/img/seven.png' },
-        { id: 2, name: 'seven', src: '/img/seven.png' },
-        { id: 3, name: 'seven', src: '/img/seven.png' },
-        { id: 4, name: 'seven', src: '/img/seven.png' },
-        { id: 5, name: 'seven', src: '/img/seven.png' },]);
-    const [originallist, setOriginalList] = useState<SlotItem[]>([]);
-    const [showresult, setShowResult] = useState<boolean>(false);
 
-    const [win, setWin] = useState<number>(0);
+    const [checkWinOnce, setcheckWinOnce] = useState(false);
+    const [strike, setStrike] = useState(WinColors.None);
+    const [score, setNewScore] = useState<SlotItemScore[]>([
+        { id: 1, name: 'none', src: '', winStrike: WinColors.None},
+        { id: 2, name: 'none', src: '', winStrike: WinColors.None},
+        { id: 3, name: 'none', src: '', winStrike: WinColors.None},
+        { id: 4, name: 'none', src: '', winStrike: WinColors.None},
+        { id: 5, name: 'none', src: '', winStrike: WinColors.None},
+    ]);
+
     const [leverStatus, setLeverStatus] = useState(false);
 
     const [rell1Spin, setRell1Spin] = useState(false);
@@ -75,45 +84,83 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         { id: 9, name: 'watermelon', src: '/img/watermelon.png' },
     ];
 
-    const checkwin = (listtocheck: SlotItem[]) => {
+
+    useEffect(() => {
+        if (checkWinOnce && !leverStatus && score.some(slot => slot.name !== "none")) {
+            checkWin();
+        }
+    }, [score]);
+
+    const setScore = (reelId: number, slot: SlotItem) => {
+        setNewScore((prev) =>  {
+            const updatedScore = [...prev];
+            const resultSlot: SlotItemScore = {
+                id: slot.id,
+                name: slot.name,
+                src: slot.src,
+                winStrike: WinColors.None,
+            }
+            
+            updatedScore[reelId] = resultSlot
+            return updatedScore;
+        })
+    }
+
+    const checkWin = () => {
+        setcheckWinOnce(false);
+        let winningElement: SlotItem;
+        let dubler: SlotItem;
+        let itsDubler = false;
         let biggestStrike = 0;
 
-        listtocheck.forEach((element1) => {
+        score.forEach((element1) => {
             let actualStrike = 0;
-            listtocheck.forEach((element2) => {
+            score.forEach((element2) => {
                 if (element1.name === element2.name) {
                     actualStrike++;
                     if (actualStrike > biggestStrike) {
                         biggestStrike = actualStrike;
+                        winningElement = element1
+                    } else if(actualStrike === 2 && biggestStrike === 2 && winningElement.name !== element1.name) {
+                        itsDubler = true;
+                        dubler = element1;
                     }
                 }
             });
         });
+        console.log("Strike: ", biggestStrike)
+        if(biggestStrike > 1) {
+            setNewScore((prevScore) =>{
+                const updatedStrikes = [...prevScore];
+                updatedStrikes.forEach((slot)=>{
+                    if(winningElement.name === slot.name && biggestStrike === 3) {
 
-        if (biggestStrike === 3) {
-            setWin(3);
-        } else if (biggestStrike === 4) {
-            setWin(4);
-        } else if (biggestStrike > 4) {
-            setWin(5);
-        } else {
-            setWin(1);
+                        slot.winStrike = WinColors.Bronze;
+                    } else if (winningElement.name === slot.name && biggestStrike === 4) {
+                        slot.winStrike = WinColors.Silver;
+                    } else if (winningElement.name === slot.name && biggestStrike === 5) {
+                        slot.winStrike = WinColors.Gold;
+                    } else if(itsDubler && winningElement.name === slot.name && biggestStrike === 2) {
+                        slot.winStrike = WinColors.Doublet1;
+                    } else if(itsDubler && dubler.name === slot.name && biggestStrike === 2) {
+                        slot.winStrike = WinColors.Doublet2;
+                    } else if(!itsDubler && winningElement.name === slot.name && biggestStrike === 2) {
+                        slot.winStrike = WinColors.Pair;
+                    }
+                })
+                return updatedStrikes;
+            })
         }
     };
 
-    const results = (): JSX.Element => {
-        let winOrLose: JSX.Element | null = null;
-
-        if (score.length === 5) {
-            if (win === 1) {
-                winOrLose = <p>Przegrałeś</p>;
-            } else if (win === 3 || win === 4 || win === 5) {
-                winOrLose = <p>Trafiłeś {win}</p>;
-            }
-        }
-
-        return <div>{winOrLose}</div>;
-    };
+    const resetWins = () => {
+        setNewScore((prevScore) =>
+            prevScore.map((elem) => ({
+                ...elem,
+                winStrike: WinColors.None
+            }))
+        );
+    }
 
     const generateRandomReel = (randomList: SlotItem[], multiplicator: number) => {
         const shuffledList = [...randomList].sort(() => Math.random() - 0.5);
@@ -127,8 +174,9 @@ const SlotMachine: FC<SlotMachineProps> = () => {
 
 
     const spin = () => {
+        resetWins();
+        setcheckWinOnce(true);
         let counter = 0;
-        let listtocheck: SlotItem[] = [];
 
         setNewRell1(generateRandomReel(baseList, 1));
         setNewRell2(generateRandomReel(baseList, 1));
@@ -137,7 +185,6 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         setNewRell5(generateRandomReel(baseList, 1));
 
         const intervalID = setInterval(() => {
-            console.log("interval")
             switch (counter) {
                 case 1:
                     setRell1Spin(false)
@@ -153,19 +200,12 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                     break;
                 case 5:
                     setRell5Spin(false)
-                    checkwin(listtocheck);
                     clearInterval(intervalID);
                     setLeverStatus(false);
                     break;
                 default:
-                // code block
             }
-            if (counter > 10) {
-                setRell5Spin(false)
-                checkwin(listtocheck);
-                clearInterval(intervalID);
-                setLeverStatus(false);
-            }
+ 
             counter++;
         }, 1000);
     }
@@ -211,19 +251,19 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                         <div className='control-panel'>
                             <div className='display'>
                                 <div className='rell1'>
-                                    <Reel symbols={rell1} spinning={rell1Spin} />
+                                    <Reel symbols={rell1} spinning={rell1Spin} setScore={setScore} id={0} />
                                 </div>
                                 <div className='rell2'>
-                                    <Reel symbols={rell2} spinning={rell2Spin} />
+                                    <Reel symbols={rell2} spinning={rell2Spin} setScore={setScore} id={1}/>
                                 </div>
                                 <div className='rell3'>
-                                    <Reel symbols={rell3} spinning={rell3Spin} />
+                                    <Reel symbols={rell3} spinning={rell3Spin} setScore={setScore} id={2}/>
                                 </div>
                                 <div className='rell4'>
-                                    <Reel symbols={rell4} spinning={rell4Spin} />
+                                    <Reel symbols={rell4} spinning={rell4Spin} setScore={setScore} id={3}/>
                                 </div>
                                 <div className='rell5'>
-                                    <Reel symbols={rell5} spinning={rell5Spin} />
+                                    <Reel symbols={rell5} spinning={rell5Spin} setScore={setScore} id={4}/>
                                 </div>
                             </div>
                             <div className='display-frame'></div>

@@ -1,19 +1,17 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { ReelWrapper } from './Reel.styled';
-
-interface SlotItem {
-   id: number;
-   name: string;
-   src?: string;
-}
+import { SlotItem } from '../../shared/interfaces';
 
 interface ReelProps {
    symbols: SlotItem[];
    spinning: boolean;
-   id?: number;
+   setScore: (reelId: number, slot: SlotItem) => void;
+   id: number;
 }
 
-const Reel: FC<ReelProps> = ({ symbols, spinning, id = 0 }) => {
+const winIndex = 2;
+
+const Reel: FC<ReelProps> = ({ symbols, spinning, setScore, id }) => {
    const [displayedSymbols, setDisplayedSymbols] = useState(symbols);
    const [brakingSpin, brakingSpinSet] = useState(false);
    const [loadedApp, loadedAppSet] = useState(false);
@@ -27,21 +25,27 @@ const Reel: FC<ReelProps> = ({ symbols, spinning, id = 0 }) => {
    }
 
    useEffect(() => {
-      setDisplayedSymbols(symbols);
+      loadedAppSet(true);
+   }, []);
 
+   useEffect(() => {
+      setDisplayedSymbols(symbols);
+   }, [symbols]);
+
+   useEffect(() => {
       if (spinning) {
-         brakingSpinSet(false); // Resetujemy stan brakingSpin
+         brakingSpinSet(false);
          const spin = setInterval(() => {
             setDisplayedSymbols((prevRell) => moveFirstElemToEnd([...prevRell]));
          }, 500);
 
          return () => clearInterval(spin);
       } else if (loadedApp) {
+         setScore(id, displayedSymbols[winIndex]);
          brakingSpinSet(true);
       }
-      
-      loadedAppSet(true)
-   }, [symbols, spinning]);
+   }, [spinning]);
+
 
    return (
       <ReelWrapper>
