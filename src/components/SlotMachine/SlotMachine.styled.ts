@@ -2,6 +2,12 @@ import styled from 'styled-components';
 
 export const SlotMachineWrapper = styled.div`
 
+.score-display-wrapper{
+ z-index: 101;
+ width: 100%;
+ height: auto;
+}
+
 .lamp {
   height:10px;
   width: 10px;
@@ -30,7 +36,6 @@ export const SlotMachineWrapper = styled.div`
   width: 400px;
   top: 0px;
   left:17px;
-
 }
 
 .red-box-main-plate {

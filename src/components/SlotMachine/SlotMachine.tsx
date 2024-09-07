@@ -3,22 +3,11 @@ import { SlotMachineWrapper } from './SlotMachine.styled';
 import Lever from './Lever/Lever';
 
 import Reel from '../Reel/Reel';
-import { SlotItem } from '../../shared/interfaces';
+import { SlotItem, SlotItemScore } from '../../shared/interfaces';
+import ScoreDisplay from '../ScoreDisplay/ScoreDisplay';
+import { WinColors } from '../../shared/enums';
 
 interface SlotMachineProps { }
-
-enum WinColors {
-    Gold = 'GOLD', //5strike
-    Silver = 'SILVER', //4Strike
-    Bronze = 'BRONZE', //3Strike
-    Pair = 'PAIR', //2x2
-    Doublet1 = 'DOUBLET1', //1x2
-    Doublet2 = 'DOUBLET2', //1x2 for second pair
-    None = 'NONE'
-}
-interface SlotItemScore extends SlotItem {
-    winStrike: WinColors
-}
 
 const SlotMachine: FC<SlotMachineProps> = () => {
 
@@ -86,7 +75,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
 
 
     useEffect(() => {
-        if (checkWinOnce && !leverStatus && score.some(slot => slot.name !== "none")) {
+        if (checkWinOnce && !leverStatus && score.every(slot => slot.name !== "none")) {
             checkWin();
         }
     }, [score]);
@@ -128,24 +117,29 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                 }
             });
         });
-        console.log("Strike: ", biggestStrike)
+
         if(biggestStrike > 1) {
             setNewScore((prevScore) =>{
                 const updatedStrikes = [...prevScore];
                 updatedStrikes.forEach((slot)=>{
                     if(winningElement.name === slot.name && biggestStrike === 3) {
-
                         slot.winStrike = WinColors.Bronze;
+                        setStrike(WinColors.Bronze);
                     } else if (winningElement.name === slot.name && biggestStrike === 4) {
                         slot.winStrike = WinColors.Silver;
+                        setStrike(WinColors.Silver);
                     } else if (winningElement.name === slot.name && biggestStrike === 5) {
                         slot.winStrike = WinColors.Gold;
+                        setStrike(WinColors.Gold);
                     } else if(itsDubler && winningElement.name === slot.name && biggestStrike === 2) {
                         slot.winStrike = WinColors.Doublet1;
+                        setStrike(WinColors.Doublet1);
                     } else if(itsDubler && dubler.name === slot.name && biggestStrike === 2) {
                         slot.winStrike = WinColors.Doublet2;
+                        setStrike(WinColors.Doublet1);
                     } else if(!itsDubler && winningElement.name === slot.name && biggestStrike === 2) {
                         slot.winStrike = WinColors.Pair;
+                        setStrike(WinColors.Pair);
                     }
                 })
                 return updatedStrikes;
@@ -170,8 +164,6 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         }
         return finalList;
     }
-
-
 
     const spin = () => {
         resetWins();
@@ -267,14 +259,20 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                                 </div>
                             </div>
                             <div className='display-frame'></div>
+                            <div className='score-display-wrapper'>
+                        <ScoreDisplay score={score} strike={strike}></ScoreDisplay>
+                    </div>
+
                         </div>
 
-
                     </div>
+                    
                     <div className='lamp'></div>
                     <div className='lever-wrapper'>
                         <Lever onPull={handleLeverPull} leverStatus={leverStatus}></Lever>
                     </div>
+
+
                 </div>
 
             </div>
