@@ -5,5 +5,6 @@ export enum WinColors {
     Pair = 'PAIR', //2x2
     Doublet1 = 'DOUBLET1', //1x2
     Doublet2 = 'DOUBLET2', //1x2 for second pair
-    None = 'NONE'
+    None = 'NONE',
+    Empty = 'EMPTY'
 }

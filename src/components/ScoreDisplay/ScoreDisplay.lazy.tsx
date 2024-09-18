@@ -6,6 +6,7 @@ import { WinColors } from '../../shared/enums';
 interface LazyScoreDisplayProps {
   score: SlotItemScore[];
   strike: WinColors;
+  leverStatus: boolean;
 }
 
 const LazyScoreDisplay = lazy(() => import('./ScoreDisplay'));

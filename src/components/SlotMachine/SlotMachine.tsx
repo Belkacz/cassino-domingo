@@ -12,13 +12,13 @@ interface SlotMachineProps { }
 const SlotMachine: FC<SlotMachineProps> = () => {
 
     const [checkWinOnce, setcheckWinOnce] = useState(false);
-    const [strike, setStrike] = useState(WinColors.None);
+    const [strike, setStrike] = useState(WinColors.Empty);
     const [score, setNewScore] = useState<SlotItemScore[]>([
-        { id: 1, name: 'none', src: '', winStrike: WinColors.None},
-        { id: 2, name: 'none', src: '', winStrike: WinColors.None},
-        { id: 3, name: 'none', src: '', winStrike: WinColors.None},
-        { id: 4, name: 'none', src: '', winStrike: WinColors.None},
-        { id: 5, name: 'none', src: '', winStrike: WinColors.None},
+        { id: 1, name: 'none', src: '', winStrike: WinColors.Empty},
+        { id: 2, name: 'none', src: '', winStrike: WinColors.Empty},
+        { id: 3, name: 'none', src: '', winStrike: WinColors.Empty},
+        { id: 4, name: 'none', src: '', winStrike: WinColors.Empty},
+        { id: 5, name: 'none', src: '', winStrike: WinColors.Empty},
     ]);
 
     const [leverStatus, setLeverStatus] = useState(false);
@@ -81,6 +81,36 @@ const SlotMachine: FC<SlotMachineProps> = () => {
     }, [score]);
 
     const setScore = (reelId: number, slot: SlotItem) => {
+        // const Slot1: SlotItemScore = {
+        //     id: baseList[1].id,
+        //     name: baseList[1].name,
+        //     src: baseList[1].src,
+        //     winStrike: WinColors.None,
+        // }
+        // const Slot2: SlotItemScore = {
+        //     id: baseList[2].id,
+        //     name: baseList[2].name,
+        //     src: baseList[2].src,
+        //     winStrike: WinColors.None,
+        // }
+        // const Slot3: SlotItemScore = {
+        //     id: baseList[3].id,
+        //     name: baseList[3].name,
+        //     src: baseList[3].src,
+        //     winStrike: WinColors.None,
+        // }
+        // const Slot4: SlotItemScore = {
+        //     id: baseList[4].id,
+        //     name: baseList[4].name,
+        //     src: baseList[4].src,
+        //     winStrike: WinColors.None,
+        // }
+        // const Slot5: SlotItemScore = {
+        //     id: baseList[1].id,
+        //     name: baseList[1].name,
+        //     src: baseList[1].src,
+        //     winStrike: WinColors.None,
+        // }
         setNewScore((prev) =>  {
             const updatedScore = [...prev];
             const resultSlot: SlotItemScore = {
@@ -89,8 +119,25 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                 src: slot.src,
                 winStrike: WinColors.None,
             }
-            
-            updatedScore[reelId] = resultSlot
+            console.log("reeelid ", reelId)
+            // if(reelId === 0) {
+            //     updatedScore[reelId] = Slot1
+            // }
+            // if(reelId === 1) {
+            //     updatedScore[reelId] = Slot2
+            // }
+            // if(reelId === 2) {
+            //     updatedScore[reelId] = Slot3
+            // }
+            // if(reelId === 3) {
+            //     updatedScore[reelId] = Slot4
+            // }
+            // if(reelId === 4) {
+            //     updatedScore[reelId] = Slot5
+            // }
+            updatedScore[reelId] = resultSlot;
+            console.log(updatedScore[reelId])
+
             return updatedScore;
         })
     }
@@ -101,7 +148,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         let dubler: SlotItem;
         let itsDubler = false;
         let biggestStrike = 0;
-
+        console.log(score)
         score.forEach((element1) => {
             let actualStrike = 0;
             score.forEach((element2) => {
@@ -118,32 +165,36 @@ const SlotMachine: FC<SlotMachineProps> = () => {
             });
         });
 
-        if(biggestStrike > 1) {
-            setNewScore((prevScore) =>{
+        console.log("biggest Strike : ", biggestStrike);
+        console.log("itsDubler : ", itsDubler);
+        if (biggestStrike > 1) {
+            setNewScore((prevScore) => {
                 const updatedStrikes = [...prevScore];
-                updatedStrikes.forEach((slot)=>{
-                    if(winningElement.name === slot.name && biggestStrike === 3) {
+                updatedStrikes.forEach((slot) => {
+                    if (winningElement && winningElement.name === slot.name && biggestStrike === 3) {
                         slot.winStrike = WinColors.Bronze;
                         setStrike(WinColors.Bronze);
-                    } else if (winningElement.name === slot.name && biggestStrike === 4) {
+                    } else if (winningElement && winningElement.name === slot.name && biggestStrike === 4) {
                         slot.winStrike = WinColors.Silver;
                         setStrike(WinColors.Silver);
-                    } else if (winningElement.name === slot.name && biggestStrike === 5) {
+                    } else if (winningElement && winningElement.name === slot.name && biggestStrike === 5) {
                         slot.winStrike = WinColors.Gold;
                         setStrike(WinColors.Gold);
-                    } else if(itsDubler && winningElement.name === slot.name && biggestStrike === 2) {
+                    } else if (winningElement && itsDubler && winningElement.name === slot.name && biggestStrike === 2) {
                         slot.winStrike = WinColors.Doublet1;
                         setStrike(WinColors.Doublet1);
-                    } else if(itsDubler && dubler.name === slot.name && biggestStrike === 2) {
+                    } else if (itsDubler && dubler && dubler.name === slot.name && biggestStrike === 2) {
                         slot.winStrike = WinColors.Doublet2;
-                        setStrike(WinColors.Doublet1);
-                    } else if(!itsDubler && winningElement.name === slot.name && biggestStrike === 2) {
+                        setStrike(WinColors.Doublet2);
+                    } else if (winningElement && !itsDubler && winningElement.name === slot.name && biggestStrike === 2) {
                         slot.winStrike = WinColors.Pair;
                         setStrike(WinColors.Pair);
                     }
-                })
+                });
                 return updatedStrikes;
-            })
+            });
+        } else {
+            setStrike(WinColors.None);
         }
     };
 
@@ -151,9 +202,12 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         setNewScore((prevScore) =>
             prevScore.map((elem) => ({
                 ...elem,
+                name: 'none',
+                src: '',
                 winStrike: WinColors.None
             }))
         );
+        setStrike(WinColors.None);
     }
 
     const generateRandomReel = (randomList: SlotItem[], multiplicator: number) => {
@@ -260,7 +314,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                             </div>
                             <div className='display-frame'></div>
                             <div className='score-display-wrapper'>
-                        <ScoreDisplay score={score} strike={strike}></ScoreDisplay>
+                        <ScoreDisplay score={score} strike={strike} leverStatus={leverStatus}></ScoreDisplay>
                     </div>
 
                         </div>
