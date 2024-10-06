@@ -81,62 +81,17 @@ const SlotMachine: FC<SlotMachineProps> = () => {
     }, [score]);
 
     const setScore = (reelId: number, slot: SlotItem) => {
-        // const Slot1: SlotItemScore = {
-        //     id: baseList[1].id,
-        //     name: baseList[1].name,
-        //     src: baseList[1].src,
-        //     winStrike: WinColors.None,
-        // }
-        // const Slot2: SlotItemScore = {
-        //     id: baseList[2].id,
-        //     name: baseList[2].name,
-        //     src: baseList[2].src,
-        //     winStrike: WinColors.None,
-        // }
-        // const Slot3: SlotItemScore = {
-        //     id: baseList[3].id,
-        //     name: baseList[3].name,
-        //     src: baseList[3].src,
-        //     winStrike: WinColors.None,
-        // }
-        // const Slot4: SlotItemScore = {
-        //     id: baseList[4].id,
-        //     name: baseList[4].name,
-        //     src: baseList[4].src,
-        //     winStrike: WinColors.None,
-        // }
-        // const Slot5: SlotItemScore = {
-        //     id: baseList[1].id,
-        //     name: baseList[1].name,
-        //     src: baseList[1].src,
-        //     winStrike: WinColors.None,
-        // }
+
         setNewScore((prev) =>  {
             const updatedScore = [...prev];
             const resultSlot: SlotItemScore = {
                 id: slot.id,
                 name: slot.name,
                 src: slot.src,
-                winStrike: WinColors.None,
+                winStrike: WinColors.Empty,
             }
-            console.log("reeelid ", reelId)
-            // if(reelId === 0) {
-            //     updatedScore[reelId] = Slot1
-            // }
-            // if(reelId === 1) {
-            //     updatedScore[reelId] = Slot2
-            // }
-            // if(reelId === 2) {
-            //     updatedScore[reelId] = Slot3
-            // }
-            // if(reelId === 3) {
-            //     updatedScore[reelId] = Slot4
-            // }
-            // if(reelId === 4) {
-            //     updatedScore[reelId] = Slot5
-            // }
+
             updatedScore[reelId] = resultSlot;
-            console.log(updatedScore[reelId])
 
             return updatedScore;
         })
@@ -148,7 +103,6 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         let dubler: SlotItem;
         let itsDubler = false;
         let biggestStrike = 0;
-        console.log(score)
         score.forEach((element1) => {
             let actualStrike = 0;
             score.forEach((element2) => {
@@ -165,8 +119,6 @@ const SlotMachine: FC<SlotMachineProps> = () => {
             });
         });
 
-        console.log("biggest Strike : ", biggestStrike);
-        console.log("itsDubler : ", itsDubler);
         if (biggestStrike > 1) {
             setNewScore((prevScore) => {
                 const updatedStrikes = [...prevScore];
@@ -204,10 +156,10 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                 ...elem,
                 name: 'none',
                 src: '',
-                winStrike: WinColors.None
+                winStrike: WinColors.Empty
             }))
         );
-        setStrike(WinColors.None);
+        setStrike(WinColors.Empty);
     }
 
     const generateRandomReel = (randomList: SlotItem[], multiplicator: number) => {

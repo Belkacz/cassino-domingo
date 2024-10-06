@@ -40,34 +40,40 @@ const ScoreDisplay: FC<ScoreDisplayProps> = ({ score, strike, leverStatus }) => 
    const [win, setWin] = useState(0);
 
    useEffect(() => {
-      console.log(strike)
+      console.log("useeddect stike =  " , strike)
       if (leverStatus) {
-         // setStrikeMsg("Losowanie ...")
-         // setMoney((prev) => prev + win);
-         // setWin(0)
+         setMoney((prev) => prev + win);
       } else {
          setStrikeMsg(changeStrikeMsg(strike));
-         if (strike !== WinColors.Empty) {
-            setCombo(calculateCombo(strike));
-            setWin(calcualteWin(strike));
-            setMoney((prev) => prev + win);
-            setBet(0);
-         }
       }
-      console.log("WIN : ", win)
+      if(strike !== WinColors.Empty) {
+         const win = calcualteResult(strike);
+         setWin(win);
+         setMoney((prev) => prev + calcualteResult(strike));
+         setTimeout(() => {
+            setBet(0);
+          }, 2000);
+      }
    }, [strike]);
 
    useEffect(() => {
       if(leverStatus) {
          setStrikeMsg("Losowanie ...")
-         setMoney((prev) => prev + win);
          setWin(0);
       } else {
          setStrikeMsg(" None ")
       }
    }, [leverStatus]);
 
+   const calcualteResult = (strike: WinColors): number => {
+      const comboResult = calculateCombo(strike);
+      setCombo(comboResult);
+      const winned = calcualteWin(strike, comboResult)
+      return winned;
+   }
+
    const calculateCombo = (strike: WinColors) => {
+      console.log("STRIKE = ", strike)
       let newCombo = combo
       if (strike === WinColors.None) {
          newCombo = 1;
@@ -94,7 +100,7 @@ const ScoreDisplay: FC<ScoreDisplayProps> = ({ score, strike, leverStatus }) => 
       }
    }
 
-   const calcualteWin = (strike: WinColors) => {
+   const calcualteWin = (strike: WinColors, combo: number) => {
       let result = 0;
       let multi = 0;
       if(strike !== WinColors.Empty && strike !== WinColors.None) {
@@ -105,12 +111,6 @@ const ScoreDisplay: FC<ScoreDisplayProps> = ({ score, strike, leverStatus }) => 
          }
          result = bet * multi * combo;
       }
-      console.log("bet : ", bet);
-      console.log("multi : ",multi)
-      console.log("combo : ",combo)
-      console.log("result : ",result)
-
-      setBet(0);
       return result;
    }
 
