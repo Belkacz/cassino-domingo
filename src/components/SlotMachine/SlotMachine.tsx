@@ -74,6 +74,9 @@ const SlotMachine: FC<SlotMachineProps> = () => {
     ];
 
 
+    const [spinFxVolume, setSpinFxVolume] = useState(0.5);
+    const spinFxSound = useRef(new Audio(require('../../assets/sounds/spin.mp3')));
+
     useEffect(() => {
         if (checkWinOnce && !leverStatus && score.every(slot => slot.name !== "none")) {
             checkWin();
@@ -172,6 +175,9 @@ const SlotMachine: FC<SlotMachineProps> = () => {
     }
 
     const spin = () => {
+        spinFxSound.current.play();
+        spinFxSound.current.volume = spinFxVolume;
+
         resetWins();
         setcheckWinOnce(true);
         let counter = 0;
@@ -189,6 +195,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                     break;
                 case 2:
                     setRell2Spin(false)
+                    console.log("play sound 2")
                     break;
                 case 3:
                     setRell3Spin(false)
@@ -200,12 +207,13 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                     setRell5Spin(false)
                     clearInterval(intervalID);
                     setLeverStatus(false);
+                    spinFxSound.current.pause();
                     break;
                 default:
             }
  
             counter++;
-        }, 1000);
+        }, 1500);
     }
 
     const handleLeverPull = () => {
@@ -217,7 +225,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
             setRell3Spin(true);
             setRell4Spin(true);
             setRell5Spin(true);
-    
+
             console.log('Dźwignia pociągnięta');
         } else {
             console.log('Dźwignia zablokowana');

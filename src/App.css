@@ -35,6 +35,28 @@ html{
   color: #61dafb;
 }
 
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.flex-container {
+  display: flex;
+  align-items: flex-start;
+}
+
+.music-box {
+  width: 150px;
+  background-color: firebrick;
+  border-radius: 10px;
+  border: 2px solid black;
+  box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
+  margin-right: -34px;
+  margin-top: 300px;
+  padding: 20px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -16,6 +16,9 @@ const Reel: FC<ReelProps> = ({ symbols, spinning, setScore, id }) => {
    const [brakingSpin, brakingSpinSet] = useState(false);
    const [loadedApp, loadedAppSet] = useState(false);
 
+   const [endSpinFxVolume, setEndSpinFxVolume] = useState(0.5);
+   const endSpinFxSound = useRef(new Audio(require('../../assets/sounds/end-spin.mp3')));
+
    const moveFirstElemToEnd = (list: SlotItem[]) => {
       let firstElem = list.shift();
       if (firstElem !== undefined) {
@@ -38,11 +41,14 @@ const Reel: FC<ReelProps> = ({ symbols, spinning, setScore, id }) => {
          const spin = setInterval(() => {
             setDisplayedSymbols((prevRell) => moveFirstElemToEnd([...prevRell]));
          }, 500);
-
+         endSpinFxSound.current.pause();
          return () => clearInterval(spin);
       } else if (loadedApp) {
          setScore(id, displayedSymbols[winIndex]);
+         console.log("reel #", id, "dispalyed: ", displayedSymbols[winIndex] )
          brakingSpinSet(true);
+         endSpinFxSound.current.volume = endSpinFxVolume;
+         endSpinFxSound.current.play();
       }
    }, [spinning]);
 

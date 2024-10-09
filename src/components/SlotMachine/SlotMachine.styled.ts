@@ -11,7 +11,7 @@ export const SlotMachineWrapper = styled.div`
 .lamp {
   height:10px;
   width: 10px;
-  background: radial-gradient(circle, rgba(231,255,46,1) 0%, rgba(239,255,0,0) 100%);;
+  background: radial-gradient(circle, rgba(231,255,46,1) 0%, rgba(239,255,0,0) 100%);
 }
 
 .plate{
