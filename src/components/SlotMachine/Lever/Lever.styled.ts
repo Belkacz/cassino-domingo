@@ -4,8 +4,8 @@ export const LeverWrapper = styled.div`
 
 .slot-machine {
   position: relative;
-  width: 300px; /* Szerokość maszyny */
-  height: 400px; /* Wysokość maszyny */
+  width: 300px;
+  height: 400px;
   background-color: #333;
   border-radius: 10px;
   overflow: hidden;
@@ -143,5 +143,22 @@ export const LeverWrapper = styled.div`
   box-shadow: inset 2px 1px 3px black; */
   box-shadow: inset 3px -3px 10px 10px gray;
 }
+
+@media (max-width: 600px) {
+    .flex-container {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+  .lever-socket-container {
+    display: none;
+  }
+  .lever-socket {
+    display: none;
+  }
+  .lever-container {
+    display: none;
+  }
+  }
+
 
 `;

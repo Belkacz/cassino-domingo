@@ -59,3 +59,11 @@ html{
     transform: rotate(360deg);
   }
 }
+
+  @media (max-width: 600px) {
+    .flex-container {
+      flex-direction: column-reverse;
+      align-items: center;
+    }
+
+}

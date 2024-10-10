@@ -64,8 +64,8 @@ export const SlotMachineWrapper = styled.div`
     background-color: yellow;
   }
 }
-.main-name-box{
-    z-index: 100;
+.main-name-box {
+    z-index: 101;
    /* padding: 0px 0px 100px 20px; */
   display: flex;
   justify-content: center;
@@ -74,7 +74,7 @@ export const SlotMachineWrapper = styled.div`
   width: 400px;
   height: 100px;
 }
-.name-box{
+.name-box {
   background-color: yellow;
   border-style: solid;
   border-color: black;
@@ -183,8 +183,12 @@ export const SlotMachineWrapper = styled.div`
     height: 90px;
 }
 
-.box {
+.spin-button {
+  display: none;
+}
 
+.button-wrapper {
+  display: none;
 }
 
 @media screen and (max-width: 600px) {
@@ -195,8 +199,41 @@ export const SlotMachineWrapper = styled.div`
     padding: 0px;
     width: 60px;
     height: 60px;
-}
+  }
+  .lever-wrapper {
+    position: fixed;
+    z-index: 1000;
+    position: absolute;
+    top: 340px;
+    right: 0px;
+  }
 
+  .button-wrapper {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+    top: -100px;
+    right: 10px;
+  }
 
+  .spin-button {
+    display: flex;
+    padding: 20px;
+    background-color: firebrick;
+    color: white;
+    border: 2px dotted yellow;
+    border-radius: 100%;
+    cursor: pointer;
+    -webkit-box-shadow: inset 0px 0px 20px 5px rgba(66, 68, 90, 0.8);
+    -moz-box-shadow: inset 0px 0px 20px 5px rgba(66, 68, 90, 0.8);
+    box-shadow: inset 0px 0px 20px 5px rgba(66, 68, 90, 0.8);
+    font-weight: bolder;
+  }
+  .mian-slot-container {
+    padding: 0px;
+  }
 }
 `;

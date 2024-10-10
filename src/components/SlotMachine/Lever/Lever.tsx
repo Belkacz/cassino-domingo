@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { LeverWrapper } from './Lever.styled';
+import Button from '@mui/material/Button';
 
 interface LeverProps {
    onPull: () => void;
@@ -12,13 +13,12 @@ const Lever: FC<LeverProps> = ({ onPull, leverStatus }) => {
       <LeverWrapper>
          <div className='lever-socket-container '>
             <div className='lever-socket'></div>
-         <div className="lever-container">
-            <div onClick={onPull} className={`lever ${leverStatus ? "pulled" : ""}`} >
+            <div className="lever-container">
+               <div onClick={onPull} className={`lever ${leverStatus ? "pulled" : ""}`} >
                   <div className="knob"></div>
+               </div>
             </div>
          </div>
-         </div>
-
       </LeverWrapper>
    );
 }

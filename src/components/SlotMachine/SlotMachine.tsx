@@ -6,6 +6,7 @@ import Reel from '../Reel/Reel';
 import { SlotItem, SlotItemScore } from '../../shared/interfaces';
 import ScoreDisplay from '../ScoreDisplay/ScoreDisplay';
 import { WinColors } from '../../shared/enums';
+import Button from '@mui/material/Button';
 
 interface SlotMachineProps { }
 
@@ -245,7 +246,6 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                         <h1>Jednoręki Bandyta</h1>
                     </div>
                 </div>
-
                 <div className='box-mount box-3d'>
                     {/* <div className='back-box'>
                     </div> */}
@@ -276,23 +276,17 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                             <div className='score-display-wrapper'>
                         <ScoreDisplay score={score} strike={strike} leverStatus={leverStatus}></ScoreDisplay>
                     </div>
-
                         </div>
-
                     </div>
-                    
                     <div className='lamp'></div>
                     <div className='lever-wrapper'>
                         <Lever onPull={handleLeverPull} leverStatus={leverStatus}></Lever>
                     </div>
-
-
                 </div>
-
+                <div className='button-wrapper'>
+                    <Button className="spin-button" onClick={handleLeverPull}>SPIN</Button>
+                </div>
             </div>
-
-
-
         </SlotMachineWrapper>
     );
 };

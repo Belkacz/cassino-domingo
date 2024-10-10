@@ -15,6 +15,7 @@ export const MusicPlayerWrapper = styled.div`
 
 .music-button-wrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
   background: white;
   padding: 20px;
@@ -33,5 +34,13 @@ export const MusicPlayerWrapper = styled.div`
     -moz-box-shadow: inset 0px 0px 2px 2px rgb(111, 111, 111);
     box-shadow: inset 0px 0px 2px 2px rgb(111, 111, 111);
 }
+
+
+@media (max-width: 600px) {
+    .music-box  {
+      margin-top: -50px;
+      margin-left: -50px;
+    }
+  }
 
 `;
