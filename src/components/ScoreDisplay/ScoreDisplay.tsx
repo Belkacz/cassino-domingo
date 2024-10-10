@@ -2,6 +2,7 @@ import React, { FC, useEffect, useMemo, useState } from 'react';
 import { ScoreDisplayWrapper } from './ScoreDisplay.styled';
 import { SlotItemScore } from '../../shared/interfaces';
 import { WinColors } from '../../shared/enums';
+import Button from '@mui/material/Button';
 
 interface ScoreDisplayProps {
    score: SlotItemScore[]
@@ -40,24 +41,24 @@ const ScoreDisplay: FC<ScoreDisplayProps> = ({ score, strike, leverStatus }) => 
    const [win, setWin] = useState(0);
 
    useEffect(() => {
-      console.log("useeddect stike =  " , strike)
+      console.log("useeddect stike =  ", strike)
       if (leverStatus) {
          setMoney((prev) => prev + win);
       } else {
          setStrikeMsg(changeStrikeMsg(strike));
       }
-      if(strike !== WinColors.Empty) {
+      if (strike !== WinColors.Empty) {
          const win = calcualteResult(strike);
          setWin(win);
          setMoney((prev) => prev + calcualteResult(strike));
          setTimeout(() => {
             setBet(0);
-          }, 2000);
+         }, 2000);
       }
    }, [strike]);
 
    useEffect(() => {
-      if(leverStatus) {
+      if (leverStatus) {
          setStrikeMsg("Losowanie ...")
          setWin(0);
       } else {
@@ -103,7 +104,7 @@ const ScoreDisplay: FC<ScoreDisplayProps> = ({ score, strike, leverStatus }) => 
    const calcualteWin = (strike: WinColors, combo: number) => {
       let result = 0;
       let multi = 0;
-      if(strike !== WinColors.Empty && strike !== WinColors.None) {
+      if (strike !== WinColors.Empty && strike !== WinColors.None) {
          for (let key in strikeMultiplicator) {
             if (key === strike) {
                multi = (strikeMultiplicator[key as WinColors]);
@@ -136,14 +137,14 @@ const ScoreDisplay: FC<ScoreDisplayProps> = ({ score, strike, leverStatus }) => 
                </div>
 
                <div className='text-wrapper set-center border-top-boy padding-sides '>
-                  <p className='title'>Bet: </p>
+                  <p className='title bet-value '>Bet: </p>
 
-                  <div className='bet-button-wrapper'><button className='bet-button' onClick={() => changeBet(-5)}> -5 </button>
+                  <div className='bet-button-wrapper'><Button className='bet-button' onClick={() => changeBet(-5)} disabled={leverStatus}> -5 </Button>
                   </div>
-                  <div className='bet-button-wrapper'> <button className='bet-button' onClick={() => changeBet(-1)}> -1 </button>
+                  <div className='bet-button-wrapper'> <Button className='bet-button' onClick={() => changeBet(-1)} disabled={leverStatus}> -1 </Button>
                   </div> <p> {bet}</p> <p> $</p>
-                  <div className='bet-button-wrapper'><button className='bet-button' onClick={() => changeBet(1)}> +1 </button></div>
-                  <div className='bet-button-wrapper'><button className='bet-button' onClick={() => changeBet(5)}> +5 </button></div>
+                  <div className='bet-button-wrapper'><Button className='bet-button' onClick={() => changeBet(1)} disabled={leverStatus}> +1 </Button></div>
+                  <div className='bet-button-wrapper'><Button className='bet-button' onClick={() => changeBet(5)} disabled={leverStatus}> +5 </Button></div>
                </div>
                <div className='text-wrapper set-center border-top-boy '>
                   <p className='title'>Money: </p>

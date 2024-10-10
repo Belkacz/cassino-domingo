@@ -33,8 +33,8 @@ export const ScoreDisplayWrapper = styled.div`
     display:flex
 }
 
-.buttons {
-
+.bet-value {
+    width: 40px;
 }
 
 .win-wrapper {
@@ -47,6 +47,8 @@ export const ScoreDisplayWrapper = styled.div`
 }
 
 .bet-button {
+    min-width: 20px;
+    width: 40px;
     padding: 10px;
     border-radius: 100%;
     background-color: brown;
@@ -69,8 +71,5 @@ export const ScoreDisplayWrapper = styled.div`
     padding: 0px 0px 0px 10px;
     display: flex;
 }
-.title{
-    font-weight: bold;
-    white-space: pre;
-}
+
 `;
