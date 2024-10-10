@@ -35,20 +35,10 @@ html{
   color: #61dafb;
 }
 
-.main-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-}
-
 .flex-container {
   display: flex;
   align-items: flex-start;
-}
-
-.title {
-  font-weight: bold;
-  white-space: pre;
+  margin-left: -7vw;
 }
 
 @keyframes App-logo-spin {
@@ -65,5 +55,8 @@ html{
       flex-direction: column-reverse;
       align-items: center;
     }
+
+ /* moje globalne css */
+
 
 }

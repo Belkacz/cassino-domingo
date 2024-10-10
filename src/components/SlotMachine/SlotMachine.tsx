@@ -7,6 +7,7 @@ import { SlotItem, SlotItemScore } from '../../shared/interfaces';
 import ScoreDisplay from '../ScoreDisplay/ScoreDisplay';
 import { WinColors } from '../../shared/enums';
 import Button from '@mui/material/Button';
+import NameBox from '../NameBox/NameBox';
 
 interface SlotMachineProps { }
 
@@ -236,16 +237,8 @@ const SlotMachine: FC<SlotMachineProps> = () => {
 
     return (
         <SlotMachineWrapper>
-            <div className='mian-slot-container'>
-                <div className='main-name-box box-3d'>
-                    <div className='name-box plate name-box-top'>
-                    </div>
-                    <div className='name-box plate name-box-right'>
-                    </div>
-                    <div className='name-box plate name-box-front'>
-                        <h1>Jednoręki Bandyta</h1>
-                    </div>
-                </div>
+            <div className='main-slot-container'>
+                <NameBox></NameBox>
                 <div className='box-mount box-3d'>
                     {/* <div className='back-box'>
                     </div> */}

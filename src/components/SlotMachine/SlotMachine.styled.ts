@@ -14,30 +14,6 @@ export const SlotMachineWrapper = styled.div`
   background: radial-gradient(circle, rgba(231,255,46,1) 0%, rgba(239,255,0,0) 100%);
 }
 
-.plate{
-  display: flex;
-  position: absolute;
-  -webkit-box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
-  -moz-box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
-  box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
-}
-
-.name-box-front  {
-  transform: translateZ(320px);
-}
-.name-box-right { 
-  top: 6px;
-  transform: rotateY(90deg) translateZ(165px);
-  height:80px;
-}
-.name-box-top{
-  transform: rotateX(-90deg) translateZ(-146px);
-  height: 300px;
-  width: 400px;
-  top: 0px;
-  left:17px;
-}
-
 .red-box-main-plate {
   width:400px;
   height: 660px;
@@ -53,37 +29,7 @@ export const SlotMachineWrapper = styled.div`
 .red-box-right  { transform: rotateY(90deg) translateZ(200px);  }
 .red-box-top    { transform: rotateX(90deg) translateZ(330px); }
 
-@keyframes colorChange {
-  0% {
-    background-color: green;
-  }
-  50% {
-    background-color: red;
-  }
-  100% {
-    background-color: yellow;
-  }
-}
-.main-name-box {
-    z-index: 101;
-   /* padding: 0px 0px 100px 20px; */
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  position: relative;
-  width: 400px;
-  height: 100px;
-}
-.name-box {
-  background-color: yellow;
-  border-style: solid;
-  border-color: black;
-  padding: 5px 20px 0px 20px;
-  width: 300px;
-  animation: colorChange 1s alternate 5;
-}
-
-.mian-slot-container {
+.main-slot-container {
   display: flex;
   justify-content: center;
   align-content: center;
@@ -107,12 +53,6 @@ export const SlotMachineWrapper = styled.div`
   right: -100px;
   rotate: 10deg;
 }
-
-.box-3d{
-  transform-style: preserve-3d; 
-  transform: rotateX(-3deg) rotateY(-3deg);
-}
-
 
 .box-mount{
   width:400px;
@@ -232,7 +172,7 @@ export const SlotMachineWrapper = styled.div`
     box-shadow: inset 0px 0px 20px 5px rgba(66, 68, 90, 0.8);
     font-weight: bolder;
   }
-  .mian-slot-container {
+  .main-slot-container {
     padding: 0px;
   }
 }

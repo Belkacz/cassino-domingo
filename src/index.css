@@ -12,3 +12,27 @@ code {
     monospace;
 
 }
+
+.main-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.title {
+  font-weight: bold;
+  white-space: pre;
+}
+
+.box-3d{
+  transform-style: preserve-3d; 
+  transform: rotateX(-3deg) rotateY(-3deg);
+}
+
+.plate{
+  display: flex;
+  position: absolute;
+  -webkit-box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
+  -moz-box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
+  box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
+}
