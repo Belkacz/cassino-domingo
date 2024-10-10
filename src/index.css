@@ -36,3 +36,10 @@ code {
   -moz-box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
   box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
 }
+
+  @media screen and (max-width: 600px) {
+    .box-3d{
+      transform: rotateX(-1deg) rotateY(-1deg);
+    }
+  
+}

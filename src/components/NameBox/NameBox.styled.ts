@@ -99,4 +99,10 @@ export const NameBoxWrapper = styled.div`
         transform: rotate(120deg);
     }
   }
+  @media (max-width: 600px) {
+    .main-name-box {
+      margin-left: -5px;
+      margin-bottom: -10px;
+    }
+    }
 `;

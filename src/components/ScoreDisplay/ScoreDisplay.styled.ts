@@ -72,4 +72,11 @@ export const ScoreDisplayWrapper = styled.div`
     display: flex;
 }
 
+@media (max-width: 600px) {
+    .bet-button {
+      width: 50px;
+      height: 50px;
+    }
+}
+
 `;

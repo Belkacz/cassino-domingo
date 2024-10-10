@@ -161,7 +161,7 @@ export const SlotMachineWrapper = styled.div`
 
   .spin-button {
     display: flex;
-    padding: 20px;
+    padding: 30px;
     background-color: firebrick;
     color: white;
     border: 2px dotted yellow;

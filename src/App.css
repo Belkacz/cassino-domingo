@@ -39,6 +39,7 @@ html{
   display: flex;
   align-items: flex-start;
   margin-left: -7vw;
+  padding: 10px;
 }
 
 @keyframes App-logo-spin {
@@ -54,6 +55,7 @@ html{
     .flex-container {
       flex-direction: column-reverse;
       align-items: center;
+      margin-left: 5px;
     }
 
  /* moje globalne css */
