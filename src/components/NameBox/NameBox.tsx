@@ -1,12 +1,15 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import { NameBoxWrapper } from './NameBox.styled';
 
 interface NameBoxProps { }
 
 const NameBox: FC<NameBoxProps> = () => {
    const [backlight, setBacklight] = useState(true)
+   const clickSound = useRef(new Audio(require('../../assets/sounds/click.mp3')));
+   clickSound.current.volume = 0.6;
 
    const toggleBackLight = () => {
+      clickSound.current.play();
       setBacklight(!backlight);
    }
 
