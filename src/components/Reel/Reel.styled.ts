@@ -42,7 +42,7 @@ export const ReelWrapper = styled.div`
 }
 
 .end-spin {
-  animation: end-spin 1000ms ease-out;
+  animation: end-spin 500ms ease-out;
 }
 
 @keyframes end-spin {

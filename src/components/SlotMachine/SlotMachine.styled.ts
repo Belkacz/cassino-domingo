@@ -153,15 +153,13 @@ export const SlotMachineWrapper = styled.div`
     position: relative;
     justify-content: center;
     align-content: center;
-    width: 100%;
-    height: 100%;
-    top: -100px;
+    top: -120px;
     right: 10px;
   }
 
   .spin-button {
     display: flex;
-    padding: 30px;
+    padding: 35px;
     background-color: firebrick;
     color: white;
     border: 2px dotted yellow;
@@ -175,5 +173,13 @@ export const SlotMachineWrapper = styled.div`
   .main-slot-container {
     padding: 0px;
   }
+  .red-box-front {
+    width: 100vw;
+  }
+
+  .red-box-sides-plate{
+    display: none;
+  }
+  
 }
 `;

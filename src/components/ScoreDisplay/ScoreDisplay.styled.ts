@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ScoreDisplayWrapper = styled.div`
 
-.score-display-containier{
+.score-display-container{
     position: absolute;
     top: 300px;
     left: 40px;
@@ -76,6 +76,14 @@ export const ScoreDisplayWrapper = styled.div`
     .bet-button {
       width: 50px;
       height: 50px;
+    }
+    .display-main {
+        margin-top: -20px;
+    }
+
+    .score-display-container {
+    left: 50%;
+    transform: translate(-50%);
     }
 }
 

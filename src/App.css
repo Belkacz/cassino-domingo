@@ -56,9 +56,6 @@ html{
       flex-direction: column-reverse;
       align-items: center;
       margin-left: 5px;
+      padding: 0px;
     }
-
- /* moje globalne css */
-
-
 }

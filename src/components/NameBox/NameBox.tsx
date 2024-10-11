@@ -21,7 +21,7 @@ const NameBox: FC<NameBoxProps> = () => {
             <div className={`name-box plate name-box-right ${backlight ? 'back-light' : 'no-light'}`}>
             </div>
             <div className={`name-box plate name-box-front ${backlight ? 'back-light' : 'no-light'}`}>
-               <h1>Jednoręki Bandyta</h1>
+               <h1>SLOT MACHINE</h1>
             </div>
             <div className='chink'>
             </div>

@@ -2,13 +2,17 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { MusicPlayerWrapper } from './MusicPlayer.styled';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeOffIcon from '@mui/icons-material/VolumeOff';
+import Stack from '@mui/material/Stack';
+import { VolumeDown } from '@mui/icons-material';
+import Slider from '@mui/material/Slider';
+import VolumeUp from '@mui/icons-material/VolumeUp';
 
 interface MusicPlayerProps { }
 
 const MusicPlayer: FC<MusicPlayerProps> = () => {
    const [musicStatus, setMusicStatus] = useState(false);
-   const [musicVolume, setMusicVolume] = useState(0.2);
-   const [currentTrackIdx, setCurrentTrackIdx] = useState(0);
+   const [musicVolume, setMusicVolume] = useState(1);
+   const [currentTrackIdx, setCurrentTrackIdx] = useState(1);
    const musicRef = useRef(new Audio(require('../../assets/music/music-long.mp3')));
 
    const tracks = [
@@ -22,7 +26,7 @@ const MusicPlayer: FC<MusicPlayerProps> = () => {
       } else {
          setCurrentTrackIdx(0);
       }
-    };
+   };
 
    useEffect(() => {
       if (musicStatus) {
@@ -41,16 +45,40 @@ const MusicPlayer: FC<MusicPlayerProps> = () => {
       };
    }, [currentTrackIdx, musicStatus]);
 
+      const handleMusicVolume = (event: Event, newValue: number | number[]) => {
+
+      let floatValue = 0;
+      if (typeof newValue === "number") {
+         floatValue = newValue / 100;
+      } else if (Array.isArray(newValue)) {
+         floatValue = newValue[0] / 100;
+      }
+
+
+      setMusicVolume(floatValue);
+      musicRef.current.volume = floatValue;
+    };
+
+
    return (
       <MusicPlayerWrapper>
-
          <div className='music-box'>
-            <div className='music-button-wrapper'>
-               <label className='title'>MUSIC</label>
-               <button className='music-button' onClick={() => setMusicStatus((prev) => !prev)}>
-                  {musicStatus ? <VolumeOffIcon></VolumeOffIcon> : <VolumeUpIcon></VolumeUpIcon>}
-               </button>
-
+            <div className='padding-wrapper'>
+               <div className='music-button-wrapper padding-box'>
+                  <label className='title'>MUSIC</label>
+                  <button className='music-button' onClick={() => setMusicStatus((prev) => !prev)}>
+                     {musicStatus ? <VolumeOffIcon></VolumeOffIcon> : <VolumeUpIcon></VolumeUpIcon>}
+                  </button>
+               </div>
+            </div>
+            <div className='padding-wrapper'>
+               <div className='music-button-wrapper padding-slider'>
+                  <Stack spacing={2} direction="row" sx={{ alignItems: 'center', mb: 1 }}>
+                     <VolumeDown />
+                     <Slider color="primary" aria-label="Volume" value={musicVolume * 100} onChange={handleMusicVolume} />
+                     <VolumeUp />
+                  </Stack>
+               </div>
             </div>
          </div>
 

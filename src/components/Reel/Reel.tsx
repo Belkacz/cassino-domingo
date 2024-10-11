@@ -42,6 +42,7 @@ const Reel: FC<ReelProps> = ({ symbols, spinning, setScore, id }) => {
             setDisplayedSymbols((prevRell) => moveFirstElemToEnd([...prevRell]));
          }, 500);
          endSpinFxSound.current.pause();
+         endSpinFxSound.current.currentTime = 0;
          return () => clearInterval(spin);
       } else if (loadedApp) {
          setScore(id, displayedSymbols[winIndex]);

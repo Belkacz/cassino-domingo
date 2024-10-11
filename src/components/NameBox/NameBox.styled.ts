@@ -35,6 +35,7 @@ export const NameBoxWrapper = styled.div`
   border-color: black;
   padding: 5px 20px 0px 20px;
   width: 300px;
+  justify-content: center;
 }
 
 .back-light {
@@ -101,7 +102,7 @@ export const NameBoxWrapper = styled.div`
   }
   @media (max-width: 600px) {
     .main-name-box {
-      margin-left: -5px;
+      margin-left: -15px;
       margin-bottom: -10px;
     }
     }

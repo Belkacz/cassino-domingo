@@ -16,7 +16,7 @@ const strikeMessages: { [key in WinColors]: string } = {
    [WinColors.Bronze]: "x3 !",
    [WinColors.Doublet1]: "x2x2",
    [WinColors.Doublet2]: "x2x2",
-   [WinColors.Pair]: " PARA ",
+   [WinColors.Pair]: " PAIR ",
    [WinColors.None]: "No strike!",
    [WinColors.Empty]: " ... ",
 };
@@ -117,7 +117,7 @@ const ScoreDisplay: FC<ScoreDisplayProps> = ({ score, strike, leverStatus }) => 
 
    return (
       <ScoreDisplayWrapper>
-         <div className='score-display-containier'>
+         <div className='score-display-container'>
             <div className='display-main'>
                <div className='separated-window'>
                   <div className='strike-display border-right-boy'>

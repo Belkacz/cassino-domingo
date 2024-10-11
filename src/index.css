@@ -39,7 +39,9 @@ code {
 
   @media screen and (max-width: 600px) {
     .box-3d{
-      transform: rotateX(-1deg) rotateY(-1deg);
+      transform: rotateX(-0deg) rotateY(-0deg);
     }
-  
+  .body{
+    width: 100vw;
+  }
 }

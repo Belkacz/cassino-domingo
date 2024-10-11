@@ -210,6 +210,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                     clearInterval(intervalID);
                     setLeverStatus(false);
                     spinFxSound.current.pause();
+                    spinFxSound.current.currentTime = 0;
                     break;
                 default:
             }
