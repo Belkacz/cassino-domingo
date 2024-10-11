@@ -251,22 +251,23 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                         <div className='control-panel'>
                             <div className='display'>
                                 <div className='rell1'>
-                                    <Reel symbols={rell1} spinning={rell1Spin} setScore={setScore} id={0} />
+                                    <Reel symbols={rell1} spinning={rell1Spin} setScore={setScore} id={0} color={score[0].winStrike} />
                                 </div>
                                 <div className='rell2'>
-                                    <Reel symbols={rell2} spinning={rell2Spin} setScore={setScore} id={1}/>
+                                    <Reel symbols={rell2} spinning={rell2Spin} setScore={setScore} id={1} color={score[1].winStrike}/>
                                 </div>
                                 <div className='rell3'>
-                                    <Reel symbols={rell3} spinning={rell3Spin} setScore={setScore} id={2}/>
+                                    <Reel symbols={rell3} spinning={rell3Spin} setScore={setScore} id={2} color={score[2].winStrike}/>
                                 </div>
                                 <div className='rell4'>
-                                    <Reel symbols={rell4} spinning={rell4Spin} setScore={setScore} id={3}/>
+                                    <Reel symbols={rell4} spinning={rell4Spin} setScore={setScore} id={3} color={score[3].winStrike}/>
                                 </div>
                                 <div className='rell5'>
-                                    <Reel symbols={rell5} spinning={rell5Spin} setScore={setScore} id={4}/>
+                                    <Reel symbols={rell5} spinning={rell5Spin} setScore={setScore} id={4} color={score[4].winStrike}/>
                                 </div>
                             </div>
                             <div className='display-frame'></div>
+                            <div className='pointier'></div>
                             <div className='score-display-wrapper'>
                         <ScoreDisplay score={score} strike={strike} leverStatus={leverStatus}></ScoreDisplay>
                     </div>

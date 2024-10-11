@@ -88,19 +88,19 @@ export const SlotMachineWrapper = styled.div`
 .display-frame {
   background-color: transparent;
   position: absolute;
-  height: 200px;
-  width: 310px;
+  height: 215px;
+  width: 320px;
   border-radius: 3px;
-  border-color: gold;
-  border-width: 2px;
-  border: solid;
+  border-color: black;
+  border-width: 4px;
+  border-style: solid;
   border-radius: 10px;
 }
 .display{
   display: flex;
   /* padding: 50px; */
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) 50px, rgba(0, 0, 0, 1) 150px, rgba(0, 0, 0, 0) 200px);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) 50px, rgba(0, 0, 0, 1) 150px, rgba(0, 0, 0, 0) 200px);
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) 55px, rgba(0, 0, 0, 1) 160px, rgba(0, 0, 0, 0) 215px);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 1) 55px, rgba(0, 0, 0, 1) 160px, rgba(0, 0, 0, 0) 215px);
 }
 .rollResult {
   padding: 20px;
@@ -130,6 +130,18 @@ export const SlotMachineWrapper = styled.div`
 .button-wrapper {
   display: none;
 }
+
+.pointier {
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid transparent;
+    border-left: 20px solid gray;
+    border-top: 10px solid transparent;
+    position: absolute;
+    top: 22%;
+    left: 10px;
+    background-image: linear-gradient(to right, red, blue);
+  }
 
 @media screen and (max-width: 600px) {
   .slotImg{

@@ -61,4 +61,28 @@ export const ReelWrapper = styled.div`
   100% { transform: translateY(-12%); }
 } */
 
+  .gold-border {
+    border: 2px solid gold;
+  }
+
+  .silver-border {
+    border: 2px solid silver;
+  }
+
+  .bronze-border {
+    border: 2px solid brown;
+  }
+
+  .green-border {
+    border: 2px solid green;
+  }
+
+  .red-border {
+    border: 2px solid red;
+  }
+
+  .base-border {
+    border: 2px solid #e6dede;
+  }
+
 `;

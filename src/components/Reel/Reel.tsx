@@ -1,17 +1,31 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { ReelWrapper } from './Reel.styled';
 import { SlotItem } from '../../shared/interfaces';
+import { WinColors } from '../../shared/enums';
 
 interface ReelProps {
    symbols: SlotItem[];
    spinning: boolean;
    setScore: (reelId: number, slot: SlotItem) => void;
    id: number;
+   color: WinColors;
 }
+
+const winningColorMap: { [key in WinColors]: string } = {
+   [WinColors.Gold]: "gold-border",
+   [WinColors.Silver]: "silver-border",
+   [WinColors.Bronze]: "bronze-border",
+   [WinColors.Doublet1]: "red-border",
+   [WinColors.Doublet2]: "red-border",
+   [WinColors.Pair]: "green-border",
+   [WinColors.None]: 'base-border',
+   [WinColors.Empty]: 'base-border',
+};
+
 
 const winIndex = 2;
 
-const Reel: FC<ReelProps> = ({ symbols, spinning, setScore, id }) => {
+const Reel: FC<ReelProps> = ({ symbols, spinning, setScore, id , color }) => {
    const [displayedSymbols, setDisplayedSymbols] = useState(symbols);
    const [brakingSpin, brakingSpinSet] = useState(false);
    const [loadedApp, loadedAppSet] = useState(false);
@@ -57,11 +71,17 @@ const Reel: FC<ReelProps> = ({ symbols, spinning, setScore, id }) => {
    return (
       <ReelWrapper>
          <div className={`reel`}>
-            {displayedSymbols.map((symbol, index) => (
-               <div key={index} className={`symbol ${spinning ? 'spinning' : ''} ${brakingSpin ? 'end-spin' : ''}`}>
-                  <img src={symbol.src} className='image' alt={symbol.name}></img>
-               </div>
-            ))}
+            {displayedSymbols.map((symbol, index) => {
+               const borderImage = index === winIndex ? winningColorMap[color] : 'base-border'; 
+               return (
+                  <div 
+                     key={index} 
+                     className={`symbol ${spinning ? 'spinning' : ''} ${brakingSpin ? 'end-spin' : ''} ${borderImage}`}
+                  >
+                     <img src={symbol.src} className='image' alt={symbol.name}></img>
+                  </div>
+               );
+            })}
          </div>
       </ReelWrapper>
    );
