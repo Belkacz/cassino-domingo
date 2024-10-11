@@ -105,5 +105,17 @@ export const NameBoxWrapper = styled.div`
       margin-left: -15px;
       margin-bottom: -10px;
     }
+    .name-box {
+      width: 240px;
+    }
+
+    .light-switch {
+      top: 0px;
+      left: 335px;
+    }
+    .chink{
+      top: 30px;
+      left: 340px;
+    }
     }
 `;

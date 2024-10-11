@@ -139,7 +139,7 @@ export const SlotMachineWrapper = styled.div`
     border-top: 10px solid transparent;
     position: absolute;
     top: 22%;
-    left: 10px;
+    left: 1vw;
     background-image: linear-gradient(to right, red, blue);
   }
 
@@ -153,11 +153,7 @@ export const SlotMachineWrapper = styled.div`
     height: 60px;
   }
   .lever-wrapper {
-    position: fixed;
-    z-index: 1000;
-    position: absolute;
-    top: 340px;
-    right: 0px;
+    display: none;
   }
 
   .button-wrapper {
