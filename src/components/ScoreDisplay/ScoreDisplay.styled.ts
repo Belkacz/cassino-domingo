@@ -82,8 +82,9 @@ export const ScoreDisplayWrapper = styled.div`
     }
 
     .score-display-container {
-    left: 50%;
-    transform: translate(-50%);
+        top: 280px;
+        left: 50%;
+        transform: translate(-50%);
     }
 }
 

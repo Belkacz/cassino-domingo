@@ -49,7 +49,6 @@ export const MusicPlayerWrapper = styled.div`
 
 @media (max-width: 600px) {
     .music-box  {
-      margin-top: -50px;
       margin-left: -50px;
       width: 90vw;
     }

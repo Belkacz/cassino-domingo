@@ -144,6 +144,15 @@ export const SlotMachineWrapper = styled.div`
   }
 
 @media screen and (max-width: 600px) {
+  .red-box-main-plate{
+  height: 620px;
+  }
+  .box-mount{
+    height: 620px;
+  }
+  .control-panel{
+    padding: 20px;
+  }
   .slotImg{
     padding: 5px;
   }
@@ -161,7 +170,7 @@ export const SlotMachineWrapper = styled.div`
     position: relative;
     justify-content: center;
     align-content: center;
-    top: -120px;
+    top: -125px;
     right: 10px;
   }
 

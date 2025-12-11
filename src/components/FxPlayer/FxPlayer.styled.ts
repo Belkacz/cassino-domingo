@@ -49,7 +49,7 @@ export const FxPlayerWrapper = styled.div`
 
 @media (max-width: 600px) {
     .music-box  {
-      margin-top: -50px;
+      margin-top: -95px;
       margin-left: -50px;
       width: 90vw;
     }
