@@ -2,7 +2,12 @@ import React, { lazy, Suspense } from 'react';
 
 const LazySlotMachine = lazy(() => import('./SlotMachine'));
 
-const SlotMachine = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; }) => (
+interface SlotMachineProps {
+  fxVolume: number;
+  fxSound: boolean;
+}
+
+const SlotMachine = (props: SlotMachineProps) => (
   <Suspense fallback={null}>
     <LazySlotMachine {...props} />
   </Suspense>

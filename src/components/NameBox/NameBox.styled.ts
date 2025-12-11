@@ -92,6 +92,11 @@ export const NameBoxWrapper = styled.div`
   top: 38px;
 }
 
+.logo {
+  width: 255px;
+  height: 79px;
+}
+
 @keyframes offSwitch{
     from {
         transform: rotate(40deg);

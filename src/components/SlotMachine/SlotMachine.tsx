@@ -9,9 +9,12 @@ import { WinColors } from '../../shared/enums';
 import Button from '@mui/material/Button';
 import NameBox from '../NameBox/NameBox';
 
-interface SlotMachineProps { }
+interface SlotMachineProps {
+    fxVolume: number;
+    fxSound: boolean
+ }
 
-const SlotMachine: FC<SlotMachineProps> = () => {
+const SlotMachine: FC<SlotMachineProps> = ({fxVolume, fxSound}) => {
 
     const [checkWinOnce, setcheckWinOnce] = useState(false);
     const [strike, setStrike] = useState(WinColors.Empty);
@@ -75,11 +78,23 @@ const SlotMachine: FC<SlotMachineProps> = () => {
         { id: 9, name: 'watermelon', src: '/img/watermelon.png' },
     ];
 
-
-    const [spinFxVolume, setSpinFxVolume] = useState(0.5);
     const spinFxSound = useRef(new Audio(require('../../assets/sounds/spin.mp3')));
 
     useEffect(() => {
+    if (fxSound && leverStatus) {
+            if (!spinFxSound.current.paused) return;
+            spinFxSound.current.play().catch(err => console.log(err));
+        } else {
+            spinFxSound.current.pause();
+        }
+    }, [fxSound]);
+
+    useEffect(() => {
+        spinFxSound.current.volume = fxVolume;
+    }, [fxVolume]);
+
+    useEffect(() => {
+        
         if (checkWinOnce && !leverStatus && score.every(slot => slot.name !== "none")) {
             checkWin();
         }
@@ -178,7 +193,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
 
     const spin = () => {
         spinFxSound.current.play();
-        spinFxSound.current.volume = spinFxVolume;
+        // spinFxSound.current.volume = fxVolume;
 
         resetWins();
         setcheckWinOnce(true);
@@ -239,7 +254,7 @@ const SlotMachine: FC<SlotMachineProps> = () => {
     return (
         <SlotMachineWrapper>
             <div className='main-slot-container'>
-                <NameBox></NameBox>
+                <NameBox fxVolume={fxVolume} fxSound={fxSound}></NameBox>
                 <div className='box-mount box-3d'>
                     {/* <div className='back-box'>
                     </div> */}
@@ -251,19 +266,24 @@ const SlotMachine: FC<SlotMachineProps> = () => {
                         <div className='control-panel'>
                             <div className='display'>
                                 <div className='rell1'>
-                                    <Reel symbols={rell1} spinning={rell1Spin} setScore={setScore} id={0} color={score[0].winStrike} />
+                                    <Reel symbols={rell1} spinning={rell1Spin} setScore={setScore} id={0} color={score[0].winStrike}
+                                        fxVolume={fxVolume} fxSound={fxSound}/>
                                 </div>
                                 <div className='rell2'>
-                                    <Reel symbols={rell2} spinning={rell2Spin} setScore={setScore} id={1} color={score[1].winStrike}/>
+                                    <Reel symbols={rell2} spinning={rell2Spin} setScore={setScore} id={1} color={score[1].winStrike}
+                                        fxVolume={fxVolume} fxSound={fxSound}/>
                                 </div>
                                 <div className='rell3'>
-                                    <Reel symbols={rell3} spinning={rell3Spin} setScore={setScore} id={2} color={score[2].winStrike}/>
+                                    <Reel symbols={rell3} spinning={rell3Spin} setScore={setScore} id={2} color={score[2].winStrike}
+                                        fxVolume={fxVolume} fxSound={fxSound}/>
                                 </div>
                                 <div className='rell4'>
-                                    <Reel symbols={rell4} spinning={rell4Spin} setScore={setScore} id={3} color={score[3].winStrike}/>
+                                    <Reel symbols={rell4} spinning={rell4Spin} setScore={setScore} id={3} color={score[3].winStrike}
+                                        fxVolume={fxVolume} fxSound={fxSound}/>
                                 </div>
                                 <div className='rell5'>
-                                    <Reel symbols={rell5} spinning={rell5Spin} setScore={setScore} id={4} color={score[4].winStrike}/>
+                                    <Reel symbols={rell5} spinning={rell5Spin} setScore={setScore} id={4} color={score[4].winStrike}
+                                        fxVolume={fxVolume} fxSound={fxSound}/>
                                 </div>
                             </div>
                             <div className='display-frame'></div>

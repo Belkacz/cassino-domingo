@@ -2,7 +2,12 @@ import React, { lazy, Suspense } from 'react';
 
 const LazyNameBox = lazy(() => import('./NameBox'));
 
-const NameBox = (props: JSX.IntrinsicAttributes & { children?: React.ReactNode; }) => (
+interface NameBoxProps {
+  fxVolume: number;
+  fxSound: boolean;
+}
+
+const NameBox = (props: NameBoxProps) => (
   <Suspense fallback={null}>
     <LazyNameBox {...props} />
   </Suspense>

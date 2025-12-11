@@ -1,6 +1,9 @@
 html{
   background-image: url("../public/background.jpeg");
   background: url("../public/background.jpeg") no-repeat center center;
+  background-color: firebrick;
+  width: 100vw;
+  height: 100vh;
   /* background-size: cover;  */
 }
 
@@ -9,9 +12,161 @@ html{
 
 }
 
+.logo-welocme{
+  width: 20vw;
+}
+
+.magin-zero{
+  margin: 0px;
+}
+
+.flex-center{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.welcome-screen{
+  display: flex;
+  justify-content: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.button-play{
+  margin-top: 3!important;;
+  width: 100%!important;;
+  font-size: 1.5rem!important;;
+  padding: 15px!important;;
+  font-weight: bold!important;;
+  color: wheat!important;;
+}
+
+
+/* Akordeon - główny kontener */
+.custom-accordion {
+  background-color: rgba(20, 20, 20, 0.9) !important;
+  color: wheat !important;
+  border: 1px solid #B22222 !important;
+  margin: 10px 0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 8px rgba(178, 34, 34, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.custom-accordion:hover {
+  box-shadow: 0 6px 12px rgba(178, 34, 34, 0.5) !important;
+  border-color: #ff4444 !important;
+}
+
+.custom-accordion:before {
+  display: none !important;
+}
+
+/* Nagłówek akordeonu */
+.accordion-summary {
+  background-color: rgba(30, 30, 30, 0.95) !important;
+  border-radius: 8px !important;
+  min-height: 56px !important;
+}
+
+.accordion-summary:hover {
+  background-color: rgba(40, 40, 40, 0.95) !important;
+}
+
+.accordion-title {
+  color: wheat !important;
+  font-weight: bold !important;
+  font-size: 1.1rem !important;
+}
+
+/* Ikona rozwijania */
+.expand-icon {
+  color: #B22222 !important;
+  font-size: 1.5rem !important;
+}
+
+/* Zawartość akordeonu */
+.accordion-details {
+  background-color: rgba(15, 15, 15, 0.95) !important;
+  border-top: 1px solid rgba(178, 34, 34, 0.3) !important;
+  padding: 20px !important;
+}
+
+.accordion-text {
+  color: wheat !important;
+  line-height: 1.8 !important;
+  font-size: 0.95rem !important;
+}
+
+.accordion-example {
+  background-color: rgba(178, 34, 34, 0.1) !important;
+  padding: 10px !important;
+  border-left: 3px solid #B22222 !important;
+  margin-top: 10px !important;
+  font-style: italic !important;
+}
+
+/* Lista w akordeonach */
+.accordion-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.accordion-list li {
+  color: wheat;
+  padding: 8px 0;
+  padding-left: 25px;
+  position: relative;
+  line-height: 1.8;
+}
+
+.accordion-list li:before {
+  content: "▸";
+  color: #B22222;
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+}
+
+/* Lista symboli */
+.symbols-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.symbol-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 10px;
+  margin: 5px 0;
+  background-color: rgba(178, 34, 34, 0.1);
+  border-radius: 5px;
+  border-left: 3px solid #B22222;
+  color: wheat;
+  transition: all 0.2s ease;
+}
+
+.symbol-item:hover {
+  background-color: rgba(178, 34, 34, 0.2);
+  transform: translateX(5px);
+}
+
+.image-welcome {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.logo-welcome {
+  max-width: 100%;
+  height: auto;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -41,6 +196,26 @@ html{
   margin-left: -7vw;
   padding: 10px;
 }
+.ul-welcome {
+  line-height: 2;
+  padding-left: 1rem;
+  /* list-style-type: disc; */
+  list-style-position: inside;
+  padding-left: 1rem;
+}
+.li-welocme {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.image-welcome {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
 
 @keyframes App-logo-spin {
   from {

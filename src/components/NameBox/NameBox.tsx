@@ -1,15 +1,21 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { NameBoxWrapper } from './NameBox.styled';
 
-interface NameBoxProps { }
+interface NameBoxProps {
+   fxVolume: number;
+   fxSound: boolean;
+}
 
-const NameBox: FC<NameBoxProps> = () => {
+const NameBox: FC<NameBoxProps> = ({fxVolume, fxSound}) => {
    const [backlight, setBacklight] = useState(true)
    const clickSound = useRef(new Audio(require('../../assets/sounds/click.mp3')));
-   clickSound.current.volume = 0.6;
+   clickSound.current.volume = fxVolume;
 
    const toggleBackLight = () => {
-      clickSound.current.play();
+      clickSound.current.volume = fxVolume;
+      if(fxSound){
+         clickSound.current.play();
+      }
       setBacklight(!backlight);
    }
 
@@ -21,7 +27,7 @@ const NameBox: FC<NameBoxProps> = () => {
             <div className={`name-box plate name-box-right ${backlight ? 'back-light' : 'no-light'}`}>
             </div>
             <div className={`name-box plate name-box-front ${backlight ? 'back-light' : 'no-light'}`}>
-               <h1>SLOT MACHINE</h1>
+               <img className='logo' src="/logo.png" alt="logo" />
             </div>
             <div className='chink'>
             </div>

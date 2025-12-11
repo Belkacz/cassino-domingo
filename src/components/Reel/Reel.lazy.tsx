@@ -9,6 +9,8 @@ interface LazyReelProps {
   setScore: (reelId: number, slot: SlotItem) => void;
   id: number;
   color: WinColors;
+  fxVolume: number;
+   fxSound: boolean;
 }
 
 const Reel = (props: LazyReelProps & { children?: React.ReactNode; }) => (

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const MusicPlayerWrapper = styled.div`
+export const FxPlayerWrapper = styled.div`
 
 .music-box {
   width: 250px;
@@ -9,7 +9,7 @@ export const MusicPlayerWrapper = styled.div`
   border: 2px solid black;
   box-shadow: inset 40px 16px 60px -10px rgba(0, 0, 0, 0.78);
   margin-right: -34px;
-  // margin-top: 300px;
+  margin-top: 200px;
   padding: 10px;
 }
 

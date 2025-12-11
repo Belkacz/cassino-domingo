@@ -9,6 +9,8 @@ interface ReelProps {
    setScore: (reelId: number, slot: SlotItem) => void;
    id: number;
    color: WinColors;
+   fxVolume: number;
+   fxSound: boolean;
 }
 
 const winningColorMap: { [key in WinColors]: string } = {
@@ -25,12 +27,10 @@ const winningColorMap: { [key in WinColors]: string } = {
 
 const winIndex = 2;
 
-const Reel: FC<ReelProps> = ({ symbols, spinning, setScore, id , color }) => {
+const Reel: FC<ReelProps> = ({ symbols, spinning, setScore, id , color, fxVolume, fxSound }) => {
    const [displayedSymbols, setDisplayedSymbols] = useState(symbols);
    const [brakingSpin, brakingSpinSet] = useState(false);
    const [loadedApp, loadedAppSet] = useState(false);
-
-   const [endSpinFxVolume, setEndSpinFxVolume] = useState(0.5);
    const endSpinFxSound = useRef(new Audio(require('../../assets/sounds/end-spin.mp3')));
 
    const moveFirstElemToEnd = (list: SlotItem[]) => {
@@ -62,8 +62,10 @@ const Reel: FC<ReelProps> = ({ symbols, spinning, setScore, id , color }) => {
          setScore(id, displayedSymbols[winIndex]);
          console.log("reel #", id, "dispalyed: ", displayedSymbols[winIndex] )
          brakingSpinSet(true);
-         endSpinFxSound.current.volume = endSpinFxVolume;
-         endSpinFxSound.current.play();
+         endSpinFxSound.current.volume = fxVolume;
+         if(fxSound){
+            endSpinFxSound.current.play();
+         }
       }
    }, [spinning]);
 
