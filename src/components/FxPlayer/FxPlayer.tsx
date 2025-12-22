@@ -10,12 +10,11 @@ import VolumeOffIcon from '@mui/icons-material/VolumeOff';
 export interface FxPlayerProps {
   fxVolume: number;
   setFxVolume: React.Dispatch<React.SetStateAction<number>>;
+  fxSound: Boolean;
   setSound: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const FxPlayer: FC<FxPlayerProps> = ({ fxVolume, setFxVolume, setSound }) => {
-   const [fxStatus, setFxStatus] = useState(false);
-  
+const FxPlayer: FC<FxPlayerProps> = ({ fxVolume, setFxVolume, fxSound, setSound }) => {
   const handleFxVolume = (event: Event, newValue: number | number[]) => {
     const floatValue =
       typeof newValue === 'number'
@@ -32,7 +31,7 @@ const FxPlayer: FC<FxPlayerProps> = ({ fxVolume, setFxVolume, setSound }) => {
             <div className='music-button-wrapper padding-box'>
                <label className='title'>FX</label>
                <button className='music-button' onClick={() => setSound((prev) => !prev)}>
-                  {fxStatus ? <VolumeOffIcon></VolumeOffIcon> : <VolumeUpIcon></VolumeUpIcon>}
+                  {fxSound ? <VolumeUpIcon /> : <VolumeOffIcon />}
                </button>
             </div>
          </div>

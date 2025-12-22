@@ -12,7 +12,6 @@ function App() {
   const [fxVolume, setFxVolume] = useState(0.2);
   const [fxSound, setSound] = useState(true);
   const [gameStarted, setGameStarted] = useState(false);
-  const [rulesOpen, setRulesOpen] = useState(false);
 
   const theme = createTheme({
     palette: {
@@ -170,7 +169,7 @@ function App() {
             <div className='main-wrapper'>
               <div className='flex-container'>
                 <div className='sound-container'>
-                  <FxPlayer fxVolume={fxVolume} setFxVolume={setFxVolume} setSound={setSound}/>
+                  <FxPlayer fxVolume={fxVolume} setFxVolume={setFxVolume} fxSound={fxSound} setSound={setSound}/>
                   <MusicPlayer />
                 </div>
                 <SlotMachine fxVolume={fxVolume} fxSound={fxSound}/>
