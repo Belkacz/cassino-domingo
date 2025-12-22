@@ -54,7 +54,7 @@ const Reel: FC<ReelProps> = ({ symbols, spinning, setScore, id , color, fxVolume
          brakingSpinSet(false);
          const spin = setInterval(() => {
             setDisplayedSymbols((prevRell) => moveFirstElemToEnd([...prevRell]));
-         }, 500);
+         }, 50);
          endSpinFxSound.current.pause();
          endSpinFxSound.current.currentTime = 0;
          return () => clearInterval(spin);

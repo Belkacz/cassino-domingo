@@ -81,15 +81,6 @@ const SlotMachine: FC<SlotMachineProps> = ({fxVolume, fxSound}) => {
     const spinFxSound = useRef(new Audio(require('../../assets/sounds/spin.mp3')));
 
     useEffect(() => {
-    if (fxSound && leverStatus) {
-            if (!spinFxSound.current.paused) return;
-            spinFxSound.current.play().catch(err => console.log(err));
-        } else {
-            spinFxSound.current.pause();
-        }
-    }, [fxSound]);
-
-    useEffect(() => {
         spinFxSound.current.volume = fxVolume;
     }, [fxVolume]);
 
@@ -99,6 +90,17 @@ const SlotMachine: FC<SlotMachineProps> = ({fxVolume, fxSound}) => {
             checkWin();
         }
     }, [score]);
+
+    useEffect(() => {
+    if (fxSound && leverStatus) {
+            if (spinFxSound.current.paused) {
+                    spinFxSound.current.play().catch(err => console.log(err));;
+            }
+        } else {
+            spinFxSound.current.pause();
+            spinFxSound.current.currentTime = 0; // Dodaj reset czasu
+        }
+    }, [fxSound, leverStatus]);
 
     const setScore = (reelId: number, slot: SlotItem) => {
 
@@ -192,8 +194,10 @@ const SlotMachine: FC<SlotMachineProps> = ({fxVolume, fxSound}) => {
     }
 
     const spin = () => {
-        spinFxSound.current.play();
-        // spinFxSound.current.volume = fxVolume;
+        if (fxSound) {
+            spinFxSound.current.play().catch(err => console.log(err));
+            spinFxSound.current.volume = fxVolume;
+        }
 
         resetWins();
         setcheckWinOnce(true);
@@ -212,7 +216,6 @@ const SlotMachine: FC<SlotMachineProps> = ({fxVolume, fxSound}) => {
                     break;
                 case 2:
                     setRell2Spin(false)
-                    console.log("play sound 2")
                     break;
                 case 3:
                     setRell3Spin(false)
@@ -243,8 +246,6 @@ const SlotMachine: FC<SlotMachineProps> = ({fxVolume, fxSound}) => {
             setRell3Spin(true);
             setRell4Spin(true);
             setRell5Spin(true);
-
-            console.log('Dźwignia pociągnięta');
         } else {
             console.log('Dźwignia zablokowana');
         }

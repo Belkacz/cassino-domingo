@@ -41,7 +41,6 @@ const ScoreDisplay: FC<ScoreDisplayProps> = ({ score, strike, leverStatus }) => 
    const [win, setWin] = useState(0);
 
    useEffect(() => {
-      console.log("useeddect stike =  ", strike)
       if (leverStatus) {
          setMoney((prev) => prev + win);
       } else {
@@ -74,7 +73,6 @@ const ScoreDisplay: FC<ScoreDisplayProps> = ({ score, strike, leverStatus }) => 
    }
 
    const calculateCombo = (strike: WinColors) => {
-      console.log("STRIKE = ", strike)
       let newCombo = combo
       if (strike === WinColors.None) {
          newCombo = 1;
